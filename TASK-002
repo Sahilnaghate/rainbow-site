@@ -1,0 +1,45 @@
+# TASK-002
+
+Title
+
+Extract Layout Components
+
+Priority
+
+Critical
+
+---
+
+## Objective
+
+Extract the navigation and footer into reusable layout components.
+
+---
+
+Move
+
+Navbar
+
+Footer
+
+into
+
+components/layout
+
+---
+
+Do not modify styling.
+
+Do not modify animations.
+
+---
+
+Acceptance Criteria
+
+✓ UI identical
+
+✓ Navigation works
+
+✓ Footer unchanged
+
+✓ Build passes
