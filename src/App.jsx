@@ -185,7 +185,7 @@ function SourcingMap() {
             <path
               key={org.name}
               d={`M${org.x},${org.y} Q${(org.x + HOME_NODE.x) / 2 + (i % 2 ? 6 : -6)},${(org.y + HOME_NODE.y) / 2 - 8} ${HOME_NODE.x},${HOME_NODE.y}`}
-              stroke={i === active ? COLORS.mustard : "rgba(242,169,0,0.28)"}
+              stroke={i === active ? COLORS.mustard : "rgba(250,162,25,0.28)"}
               strokeWidth={i === active ? 0.7 : 0.4}
               strokeDasharray="1.6 1.6"
               fill="none"
@@ -315,9 +315,8 @@ export default function App() {
           transition: "all 0.4s ease",
         }}>
           <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-10" style={{ height: scrolled ? "64px" : "84px", transition: "height 0.4s ease" }}>
-            <a href="#" className="flex items-baseline gap-2">
-              <span className="rs-display" style={{ fontSize: "1.5rem", fontWeight: 600, color: COLORS.red }}>Rainbow</span>
-              <span className="rs-eyebrow" style={{ fontSize: "0.7rem", color: COLORS.mustard }}>Masala</span>
+            <a href="#" className="flex items-center gap-2">
+              <img src="/logo.png" alt="Rainbow Masala" style={{ height: scrolled ? "40px" : "48px", width: "auto", transition: "height 0.4s ease" }} />
             </a>
             <nav className="hidden lg:flex items-center gap-7 rs-body" style={{ fontSize: "0.92rem" }}>
               {NAV.map((item) => (

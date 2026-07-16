@@ -1,14 +1,16 @@
-// Rainbow Masala design tokens — warm cream base, Everest-style red + mustard.
+// Rainbow Masala design tokens — brand colours extracted from the existing
+// rainbowspices.com site (red #D22C2E/#BA2C28, amber #FAA219, golden #D48F26)
+// on a warm cream base.
 export const COLORS = {
   cream: "#FFF6E7",
   paper: "#FFFFFF",
   ink: "#2A160C",
   inkDim: "#6B5040",
-  red: "#C41E1E",
-  redDeep: "#7A1414",
-  mustard: "#F2A900",
-  gold: "#C9A667",
-  paprika: "#A63A1F",
+  red: "#D22C2E",
+  redDeep: "#8E1B1D",
+  mustard: "#FAA219",
+  gold: "#D48F26",
+  paprika: "#BA2C28",
   cardamom: "#5C6B3F",
 };
 

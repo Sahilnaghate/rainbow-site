@@ -143,7 +143,7 @@ function VortexFallback() {
   return (
     <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
       <div style={{ width: "70%", maxWidth: "260px", aspectRatio: "1/1" }}>
-        <SpiceMound id="vortex-fallback" base="#F2A900" deep="#7A1414" variant={1} threads />
+        <SpiceMound id="vortex-fallback" base="#FAA219" deep="#8E1B1D" variant={1} threads />
       </div>
     </div>
   );
@@ -190,7 +190,7 @@ export function SpiceVortexScene() {
       const key = new THREE.DirectionalLight(0xffe3b0, 1.7);
       key.position.set(3, 5, 4);
       scene.add(key);
-      const rim = new THREE.PointLight(0xf2a900, 2.4, 12);
+      const rim = new THREE.PointLight(0xfaa219, 2.4, 12);
       rim.position.set(-2, 2.5, 2);
       scene.add(rim);
 
@@ -225,8 +225,8 @@ export function SpiceVortexScene() {
       const positions = new Float32Array(COUNT * 3);
       const colors = new Float32Array(COUNT * 3);
       const seeds = [];
-      const cRed = new THREE.Color(0xc41e1e);
-      const cMustard = new THREE.Color(0xf2a900);
+      const cRed = new THREE.Color(0xd22c2e);
+      const cMustard = new THREE.Color(0xfaa219);
       const cDark = new THREE.Color(0x2a160c);
       for (let i = 0; i < COUNT; i++) {
         seeds.push({
