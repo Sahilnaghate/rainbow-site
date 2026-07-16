@@ -1,0 +1,35 @@
+# TASK-004
+
+Title
+
+Extract Products Section
+
+Priority
+
+Critical
+
+---
+
+Move
+
+Products
+
+Categories
+
+Cards
+
+Filters
+
+into
+
+sections/Products
+
+---
+
+Acceptance Criteria
+
+No UI changes.
+
+Cards unchanged.
+
+Animations preserved.
