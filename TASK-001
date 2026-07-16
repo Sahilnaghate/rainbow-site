@@ -1,0 +1,87 @@
+# TASK-001
+
+Title
+
+Project Foundation
+
+Status
+
+Ready
+
+Priority
+
+Critical
+
+Sprint
+
+Sprint 01
+
+Estimated Time
+
+30 Minutes
+
+---
+
+## Objective
+
+Prepare the repository for long-term development.
+
+---
+
+## Scope
+
+Create the following folders if they do not already exist.
+
+src/components
+
+src/sections
+
+src/features
+
+src/hooks
+
+src/lib
+
+src/utils
+
+src/data
+
+src/styles
+
+src/assets
+
+---
+
+Move nothing yet.
+
+Create only the architecture.
+
+---
+
+## Constraints
+
+No UI changes.
+
+No file deletions.
+
+No dependency updates.
+
+---
+
+## Deliverables
+
+Folder structure.
+
+README references updated if needed.
+
+---
+
+## Acceptance Criteria
+
+✓ Build succeeds
+
+✓ Website unchanged
+
+✓ Zero console errors
+
+✓ No functionality changed
