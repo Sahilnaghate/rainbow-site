@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { COLORS, tint, LINKS } from "./theme.js";
-import { Reveal, TiltCard, GrainDefs, SpiceMound, SpiceVortexScene, VortexErrorBoundary } from "./components.jsx";
+import { Reveal, TiltCard, GrainDefs, SpiceMound, KenBurns } from "./components.jsx";
 import {
   TRUST_COUNTERS, CUISINES, PRODUCTS, ORIGINS, HOME_NODE, RECIPES,
   TESTIMONIALS, TIMELINE, DISTRIBUTOR, FAQS,
@@ -16,6 +16,55 @@ const NAV = [
 ];
 
 const inr = (n) => `₹${Number(n).toLocaleString("en-IN")}`;
+
+const HERO_SLIDES = [
+  "/images/hero/garam-masal.jpg",
+  "/images/hero/kitchenking-masala.jpg",
+  "/images/hero/chat-masala.jpg",
+  "/images/hero/banner2.jpg",
+];
+
+/* ============ Cinematic intro splash (2.5s, once per session, skippable) ============ */
+function IntroSplash({ onDone }) {
+  const [leaving, setLeaving] = useState(false);
+  useEffect(() => {
+    const t1 = setTimeout(() => setLeaving(true), 2100);
+    const t2 = setTimeout(onDone, 2850);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [onDone]);
+  const skip = () => { setLeaving(true); setTimeout(onDone, 500); };
+  return (
+    <div
+      onClick={skip}
+      className="fixed inset-0 z-[200] flex flex-col items-center justify-center cursor-pointer"
+      style={{
+        background: `radial-gradient(ellipse at 50% 42%, ${COLORS.redDeep}, ${COLORS.ink} 82%)`,
+        transform: leaving ? "translateY(-100%)" : "translateY(0)",
+        transition: "transform 0.75s cubic-bezier(.76,0,.24,1)",
+      }}
+      aria-label="Intro — click to skip"
+    >
+      {[...Array(14)].map((_, i) => (
+        <span key={i} className="rs-spark" style={{
+          "--a": `${(i / 14) * 360}deg`,
+          "--d": `${120 + (i % 4) * 46}px`,
+          background: i % 3 === 0 ? COLORS.mustard : i % 3 === 1 ? COLORS.red : "#fff",
+          animationDelay: `${0.55 + (i % 5) * 0.05}s`,
+        }} />
+      ))}
+      <div className="rs-intro-logo" style={{ background: "#fff", borderRadius: "16px", padding: "14px 20px", boxShadow: `0 0 60px ${tint(COLORS.mustard, 0.45)}` }}>
+        <img src="/logo.png" alt="Rainbow Masala" style={{ height: "84px", width: "auto", display: "block" }} />
+      </div>
+      <p className="rs-eyebrow rs-intro-tag" style={{ color: COLORS.mustard, fontSize: "0.78rem", marginTop: "1.6rem" }}>
+        Professional Kitchen Masala Partner
+      </p>
+      <p className="rs-body rs-intro-tag" style={{ color: "rgba(255,246,231,0.55)", fontSize: "0.72rem", marginTop: "0.5rem", animationDelay: "1.1s" }}>
+        since 1962 · Chh. Sambhajinagar
+      </p>
+      <span className="rs-body absolute bottom-6 right-8" style={{ color: "rgba(255,246,231,0.45)", fontSize: "0.72rem" }}>click to skip →</span>
+    </div>
+  );
+}
 
 function Eyebrow({ children, color = COLORS.red, center }) {
   return <p className={`rs-eyebrow ${center ? "text-center" : ""}`} style={{ color, fontSize: "0.8rem" }}>{children}</p>;
@@ -261,6 +310,12 @@ export default function App() {
   const [bulkOpen, setBulkOpen] = useState(false);
   const [availOpen, setAvailOpen] = useState(false);
   const [cuisine, setCuisine] = useState("All");
+  const [intro, setIntro] = useState(() => {
+    if (typeof window === "undefined") return false;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
+    return !sessionStorage.getItem("rs-intro-seen");
+  });
+  const closeIntro = () => { setIntro(false); try { sessionStorage.setItem("rs-intro-seen", "1"); } catch {} };
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -291,10 +346,26 @@ export default function App() {
         .rs-nav-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: ${COLORS.red}; transform: scaleX(0); transform-origin: right; transition: transform 0.35s ease; }
         .rs-nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
         @media (prefers-reduced-motion: reduce) { .rs-marquee-track, .rs-float-chip { animation: none; } }
+
+        .rs-intro-logo { animation: rs-logo-in 0.9s cubic-bezier(.22,.61,.36,1) both; }
+        @keyframes rs-logo-in { 0% { opacity: 0; transform: scale(0.6); } 60% { opacity: 1; transform: scale(1.06); } 100% { transform: scale(1); } }
+        .rs-intro-tag { animation: rs-tag-in 0.7s ease 0.8s both; }
+        @keyframes rs-tag-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .rs-spark { position: absolute; left: 50%; top: 42%; width: 7px; height: 7px; border-radius: 999px; opacity: 0; animation: rs-burst 1.1s cubic-bezier(.22,.61,.36,1) both; }
+        @keyframes rs-burst {
+          0% { opacity: 0; transform: rotate(var(--a)) translateX(0) scale(0.4); }
+          25% { opacity: 1; }
+          100% { opacity: 0; transform: rotate(var(--a)) translateX(var(--d)) scale(1); }
+        }
+        .rs-kenburns { transform: scale(1); }
+        .rs-kb-active { animation: rs-kb 6.5s ease-out both; }
+        @keyframes rs-kb { from { transform: scale(1.02); } to { transform: scale(1.14); } }
+        @media (prefers-reduced-motion: reduce) { .rs-kb-active { animation: none; } }
       `}</style>
 
       <div className="rs-root">
         <GrainDefs />
+        {intro && <IntroSplash onDone={closeIntro} />}
         <BulkInquiryModal open={bulkOpen} onClose={() => setBulkOpen(false)} />
         <AvailabilityModal open={availOpen} onClose={(next) => { setAvailOpen(false); if (next === "bulk") setBulkOpen(true); }} />
 
@@ -384,8 +455,9 @@ export default function App() {
               </Reveal>
             </div>
 
-            <div className="relative rounded-3xl overflow-hidden" style={{ height: "min(62vw, 480px)", background: `radial-gradient(ellipse at 50% 30%, ${COLORS.redDeep}, ${COLORS.ink} 85%)`, boxShadow: "0 30px 70px rgba(122,20,20,0.28)" }}>
-              <VortexErrorBoundary><SpiceVortexScene /></VortexErrorBoundary>
+            <div className="relative rounded-3xl overflow-hidden" style={{ height: "min(62vw, 480px)", background: COLORS.ink, boxShadow: "0 30px 70px rgba(122,20,20,0.28)" }}>
+              <KenBurns images={HERO_SLIDES} />
+              <div className="absolute inset-0" style={{ background: `linear-gradient(160deg, ${tint(COLORS.ink, 0.35)} 0%, transparent 42%, ${tint(COLORS.redDeep, 0.5)} 78%, ${tint(COLORS.ink, 0.92)} 100%)` }} />
               <div className="rs-float-chip hidden sm:flex flex-col" style={{ position: "absolute", top: "6%", right: "4%", width: "104px", height: "116px", background: COLORS.paper, border: `2px solid ${COLORS.mustard}`, borderRadius: "14px", padding: "8px", "--r": "-6deg", boxShadow: "0 14px 30px rgba(0,0,0,0.35)", zIndex: 5 }}>
                 <img src="/images/products/garam-masala.png" alt="Garam Masala pack" style={{ width: "100%", height: "82px", objectFit: "contain" }} />
                 <p className="rs-eyebrow text-center mt-1" style={{ fontSize: "0.5rem", color: COLORS.inkDim }}>Garam Masala</p>

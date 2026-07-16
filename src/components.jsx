@@ -129,6 +129,34 @@ export function SpiceMound({ id, base, deep, threads = false, variant = 0, showF
   );
 }
 
+/* ---------- Ken Burns hero slideshow (real food photography) ---------- */
+export function KenBurns({ images, interval = 4500 }) {
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % images.length), interval);
+    return () => clearInterval(t);
+  }, [images.length, interval]);
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {images.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt=""
+          aria-hidden="true"
+          className={`rs-kenburns ${i === idx ? "rs-kb-active" : ""}`}
+          style={{
+            position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover",
+            objectPosition: "8% center", // old banners carry baked-in text on the right — keep the dish side
+            opacity: i === idx ? 1 : 0,
+            transition: "opacity 1.6s ease",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 /* ---------- 3D hero: mortar, pestle, spice-dust vortex ---------- */
 function hasWebGL() {
   try {
