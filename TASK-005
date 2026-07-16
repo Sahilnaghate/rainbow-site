@@ -1,0 +1,31 @@
+# TASK-005
+
+Title
+
+Extract Business Features
+
+Priority
+
+High
+
+---
+
+Move
+
+Bulk Inquiry
+
+Availability Finder
+
+Cost Calculator
+
+into
+
+features/
+
+---
+
+Acceptance Criteria
+
+Business logic separated from UI.
+
+Everything works.
