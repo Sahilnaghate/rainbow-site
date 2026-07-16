@@ -1,0 +1,37 @@
+# TASK-007
+
+Title
+
+Create Shared UI Library
+
+Priority
+
+Medium
+
+---
+
+Prepare reusable
+
+Button
+
+Card
+
+Badge
+
+Container
+
+Section
+
+Heading
+
+Modal
+
+Input
+
+Textarea
+
+---
+
+Do NOT redesign.
+
+Only reuse existing styles.
