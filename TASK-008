@@ -1,0 +1,31 @@
+# TASK-008
+
+Title
+
+Cleanup
+
+Priority
+
+Medium
+
+---
+
+Remove
+
+Duplicate imports
+
+Unused variables
+
+Dead code
+
+Repeated utilities
+
+Repeated Tailwind classes
+
+---
+
+Acceptance Criteria
+
+Build clean.
+
+Zero warnings.
