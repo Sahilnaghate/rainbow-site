@@ -17,11 +17,20 @@ const NAV = [
 
 const inr = (n) => `₹${Number(n).toLocaleString("en-IN")}`;
 
+// Stylised India silhouette (decorative, not a survey map) in a 100x110 viewBox.
+const INDIA_PATH =
+  "M36,3 C33,7 30,10 29,13 C26,17 23,20 20,25 C17,29 13,32 11,35 C9,38 5,40 5,43 " +
+  "C7,46 9,47 10,49 C12,47 13,46 15,47 C15,50 16,52 17,53 C19,56 21,58 22,60 " +
+  "C24,64 26,67 27,70 C29,74 31,78 32,82 C33,87 35,92 37,97 C39,93 41,89 43,85 " +
+  "C45,81 48,77 51,72 C54,68 56,64 58,61 C60,57 62,53 64,50 C65,48 66,46 67,44 " +
+  "C70,43 72,42 74,41 C78,40 81,38 84,38 C86,38 89,38 90,40 C88,42 86,43 83,44 " +
+  "C80,45 77,46 74,46 C72,46 70,46 68,45 C67,44 66,43 65,42 C63,39 60,35 58,32 " +
+  "C55,28 53,25 50,22 C48,18 45,15 43,12 C41,9 38,6 36,3 Z";
+
 const HERO_SLIDES = [
   "/images/hero/garam-masal.jpg",
   "/images/hero/kitchenking-masala.jpg",
   "/images/hero/chat-masala.jpg",
-  "/images/hero/banner2.jpg",
 ];
 
 /* ============ Cinematic intro splash (2.5s, once per session, skippable) ============ */
@@ -223,41 +232,53 @@ function SourcingMap() {
   const [active, setActive] = useState(0);
   return (
     <div className="grid md:grid-cols-5 gap-8 items-stretch mt-14">
-      <div className="md:col-span-3 relative rounded-3xl overflow-hidden" style={{ background: `radial-gradient(ellipse at 50% 20%, ${COLORS.redDeep}, ${COLORS.ink} 80%)`, minHeight: "420px" }}>
-        <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full" preserveAspectRatio="none" aria-hidden="true">
-          {[...Array(12)].map((_, r) =>
-            [...Array(12)].map((_, c) => (
-              <circle key={`${r}-${c}`} cx={4 + c * 8.4} cy={4 + r * 8.4} r="0.35" fill="rgba(255,246,231,0.14)" />
-            ))
-          )}
+      <div className="md:col-span-3 relative rounded-3xl overflow-hidden p-4" style={{ background: `radial-gradient(ellipse at 50% 20%, ${COLORS.redDeep}, ${COLORS.ink} 80%)`, minHeight: "460px" }}>
+        {/* aspect-locked wrapper so SVG map coords line up with pin percentages */}
+        <div className="relative mx-auto h-full" style={{ aspectRatio: "100/110", maxWidth: "100%" }}>
+          <svg viewBox="0 0 100 110" className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <defs>
+              <clipPath id="india-clip"><path d={INDIA_PATH} /></clipPath>
+            </defs>
+            <path d={INDIA_PATH} fill="rgba(250,162,25,0.09)" stroke="rgba(250,162,25,0.55)" strokeWidth="0.6" strokeLinejoin="round" />
+            <g clipPath="url(#india-clip)">
+              {[...Array(22)].map((_, r) =>
+                [...Array(20)].map((_, c) => (
+                  <circle key={`${r}-${c}`} cx={2.5 + c * 5} cy={2.5 + r * 5} r="0.32" fill="rgba(255,246,231,0.16)" />
+                ))
+              )}
+            </g>
+            {ORIGINS.map((org, i) => (
+              <path
+                key={org.name}
+                d={`M${org.x},${org.y} Q${(org.x + HOME_NODE.x) / 2 + (i % 2 ? 5 : -5)},${(org.y + HOME_NODE.y) / 2 - 6} ${HOME_NODE.x},${HOME_NODE.y}`}
+                stroke={i === active ? COLORS.mustard : "rgba(250,162,25,0.3)"}
+                strokeWidth={i === active ? 0.7 : 0.4}
+                strokeDasharray="1.6 1.6"
+                fill="none"
+              />
+            ))}
+            <circle cx={HOME_NODE.x} cy={HOME_NODE.y} r="2.2" fill={COLORS.mustard} />
+            <circle cx={HOME_NODE.x} cy={HOME_NODE.y} r="3.8" fill="none" stroke={COLORS.mustard} strokeWidth="0.4" opacity="0.6" />
+          </svg>
           {ORIGINS.map((org, i) => (
-            <path
+            <button
               key={org.name}
-              d={`M${org.x},${org.y} Q${(org.x + HOME_NODE.x) / 2 + (i % 2 ? 6 : -6)},${(org.y + HOME_NODE.y) / 2 - 8} ${HOME_NODE.x},${HOME_NODE.y}`}
-              stroke={i === active ? COLORS.mustard : "rgba(250,162,25,0.28)"}
-              strokeWidth={i === active ? 0.7 : 0.4}
-              strokeDasharray="1.6 1.6"
-              fill="none"
+              onClick={() => setActive(i)}
+              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
+              style={{
+                left: `${org.x}%`, top: `${(org.y / 110) * 100}%`, width: i === active ? "20px" : "14px", height: i === active ? "20px" : "14px",
+                background: org.base, border: `2.5px solid ${i === active ? COLORS.mustard : "rgba(255,246,231,0.6)"}`,
+                boxShadow: i === active ? `0 0 18px ${tint(COLORS.mustard, 0.8)}` : "none", transition: "all 0.3s ease", cursor: "pointer",
+              }}
+              aria-label={`${org.name} — ${org.place}`}
             />
           ))}
-          <circle cx={HOME_NODE.x} cy={HOME_NODE.y} r="2.4" fill={COLORS.mustard} />
-          <circle cx={HOME_NODE.x} cy={HOME_NODE.y} r="4" fill="none" stroke={COLORS.mustard} strokeWidth="0.4" opacity="0.6" />
-        </svg>
-        {ORIGINS.map((org, i) => (
-          <button
-            key={org.name}
-            onClick={() => setActive(i)}
-            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
-            style={{
-              left: `${org.x}%`, top: `${org.y}%`, width: i === active ? "22px" : "16px", height: i === active ? "22px" : "16px",
-              background: org.base, border: `2.5px solid ${i === active ? COLORS.mustard : "rgba(255,246,231,0.6)"}`,
-              boxShadow: i === active ? `0 0 18px ${tint(COLORS.mustard, 0.8)}` : "none", transition: "all 0.3s ease", cursor: "pointer",
-            }}
-            aria-label={`${org.name} — ${org.place}`}
-          />
-        ))}
+        </div>
         <div className="absolute left-4 bottom-4 rs-body" style={{ fontSize: "0.7rem", color: "rgba(255,246,231,0.7)" }}>
           ● {HOME_NODE.name}, {HOME_NODE.place}
+        </div>
+        <div className="absolute right-4 top-4 rs-body" style={{ fontSize: "0.62rem", color: "rgba(255,246,231,0.45)" }}>
+          Stylised map · not to scale
         </div>
       </div>
       <div className="md:col-span-2 flex flex-col gap-3">
@@ -458,13 +479,9 @@ export default function App() {
             <div className="relative rounded-3xl overflow-hidden" style={{ height: "min(62vw, 480px)", background: COLORS.ink, boxShadow: "0 30px 70px rgba(122,20,20,0.28)" }}>
               <KenBurns images={HERO_SLIDES} />
               <div className="absolute inset-0" style={{ background: `linear-gradient(160deg, ${tint(COLORS.ink, 0.35)} 0%, transparent 42%, ${tint(COLORS.redDeep, 0.5)} 78%, ${tint(COLORS.ink, 0.92)} 100%)` }} />
-              <div className="rs-float-chip hidden sm:flex flex-col" style={{ position: "absolute", top: "6%", right: "4%", width: "104px", height: "116px", background: COLORS.paper, border: `2px solid ${COLORS.mustard}`, borderRadius: "14px", padding: "8px", "--r": "-6deg", boxShadow: "0 14px 30px rgba(0,0,0,0.35)", zIndex: 5 }}>
-                <img src="/images/products/garam-masala.png" alt="Garam Masala pack" style={{ width: "100%", height: "82px", objectFit: "contain" }} />
-                <p className="rs-eyebrow text-center mt-1" style={{ fontSize: "0.5rem", color: COLORS.inkDim }}>Garam Masala</p>
-              </div>
-              <div className="rs-float-chip hidden sm:flex flex-col" style={{ position: "absolute", bottom: "5%", left: "4%", width: "92px", height: "104px", background: COLORS.paper, border: `2px solid ${COLORS.mustard}`, borderRadius: "14px", padding: "8px", "--r": "5deg", boxShadow: "0 14px 30px rgba(0,0,0,0.35)", zIndex: 5, animationDelay: "1.4s" }}>
-                <img src="/images/products/saffron.png" alt="Saffron pack" style={{ width: "100%", height: "70px", objectFit: "contain" }} />
-                <p className="rs-eyebrow text-center mt-1" style={{ fontSize: "0.5rem", color: COLORS.inkDim }}>Saffron</p>
+              <div className="absolute bottom-4 left-4 flex items-center gap-2.5 px-4 py-2.5 rounded-full" style={{ background: "rgba(42,22,12,0.55)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,246,231,0.28)" }}>
+                <span className="h-2 w-2 rounded-full" style={{ background: COLORS.mustard }} />
+                <span className="rs-eyebrow" style={{ fontSize: "0.6rem", color: "#FFF6E7" }}>Cooked on Rainbow blends · batch-traceable</span>
               </div>
             </div>
           </div>

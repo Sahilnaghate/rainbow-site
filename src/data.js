@@ -27,15 +27,15 @@ export const PRODUCTS = [
 ];
 
 export const ORIGINS = [
-  { name: "Chilli", place: "Guntur, Andhra Pradesh", x: 58, y: 66, base: "#C41E1E", detail: "Teja & Byadgi grades, bought at mandi auctions each season." },
-  { name: "Turmeric", place: "Sangli, Maharashtra", x: 40, y: 58, base: "#F2A900", detail: "High-curcumin Salem-type fingers, polished in-house." },
-  { name: "Black Pepper", place: "Idukki, Kerala", x: 48, y: 84, base: "#3A2A1A", detail: "Estate-direct MG-1 pepper, sun-dried on the farm." },
-  { name: "Saffron", place: "Pampore, Kashmir", x: 34, y: 10, base: "#A63A1F", detail: "Mongra-grade threads, hand-picked in October harvests." },
-  { name: "Cumin", place: "Unjha, Gujarat", x: 22, y: 42, base: "#8B5A2B", detail: "Bold machine-cleaned cumin from Asia's largest jeera market." },
-  { name: "Coriander", place: "Kota, Rajasthan", x: 34, y: 32, base: "#5C6B3F", detail: "Eagle-grade coriander with the green tint chefs look for." },
+  { name: "Chilli", place: "Guntur, Andhra Pradesh", x: 46, y: 71, base: "#C41E1E", detail: "Teja & Byadgi grades, bought at mandi auctions each season." },
+  { name: "Turmeric", place: "Sangli, Maharashtra", x: 30, y: 67, base: "#F2A900", detail: "High-curcumin Salem-type fingers, polished in-house." },
+  { name: "Black Pepper", place: "Idukki, Kerala", x: 36, y: 88, base: "#3A2A1A", detail: "Estate-direct MG-1 pepper, sun-dried on the farm." },
+  { name: "Saffron", place: "Pampore, Kashmir", x: 33, y: 10, base: "#A63A1F", detail: "Mongra-grade threads, hand-picked in October harvests." },
+  { name: "Cumin", place: "Unjha, Gujarat", x: 17, y: 42, base: "#8B5A2B", detail: "Bold machine-cleaned cumin from Asia's largest jeera market." },
+  { name: "Coriander", place: "Kota, Rajasthan", x: 27, y: 31, base: "#5C6B3F", detail: "Eagle-grade coriander with the green tint chefs look for." },
 ];
 
-export const HOME_NODE = { name: "Rainbow Blending House", place: "Chh. Sambhajinagar, Maharashtra", x: 38, y: 52 };
+export const HOME_NODE = { name: "Rainbow Blending House", place: "Chh. Sambhajinagar, Maharashtra", x: 31, y: 61 };
 
 export const RECIPES = [
   { name: "Hotel-style Sambhar Base", base: "#C4471D", deep: "#5C2210", batch: "10L base · 80 plates", uses: "Sambhar Masala 320g", time: "45 min", img: "/images/recipes/sambhar.jpg" },
