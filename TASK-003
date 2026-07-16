@@ -1,0 +1,41 @@
+# TASK-003
+
+Title
+
+Extract Hero Section
+
+Priority
+
+Critical
+
+---
+
+Move Hero into
+
+sections/Hero
+
+---
+
+Requirements
+
+Preserve
+
+Three.js
+
+Animations
+
+Buttons
+
+Layout
+
+Content
+
+---
+
+Acceptance Criteria
+
+Hero is visually identical.
+
+No regressions.
+
+App.jsx imports Hero.
