@@ -12,18 +12,18 @@ export const TRUST_COUNTERS = [
 export const CUISINES = ["All", "North Indian", "South Indian", "Street", "Universal"];
 
 export const PRODUCTS = [
-  { name: "Garam Masala", base: "#A9702E", deep: "#5C3A1E", cuisine: "Universal", packs: "1kg · 5kg · 25kg", yieldPerKg: 160, pricePerKg: 620, shelf: "12 mo", note: "The house finishing blend" },
-  { name: "Kitchen King Masala", base: "#F2A900", deep: "#8A5F0E", cuisine: "Universal", packs: "1kg · 5kg · 25kg", yieldPerKg: 130, pricePerKg: 540, shelf: "12 mo", note: "All-purpose gravy depth" },
-  { name: "Chhole Masala", base: "#C41E1E", deep: "#6B0F0F", cuisine: "North Indian", packs: "1kg · 5kg", yieldPerKg: 120, pricePerKg: 560, shelf: "12 mo", note: "North-Indian tang" },
+  { name: "Garam Masala", img: "/images/products/garam-masala.png", base: "#A9702E", deep: "#5C3A1E", cuisine: "Universal", packs: "1kg · 5kg · 25kg", yieldPerKg: 160, pricePerKg: 620, shelf: "12 mo", note: "The house finishing blend" },
+  { name: "Kitchen King Masala", img: "/images/products/kitchen-king.png", base: "#F2A900", deep: "#8A5F0E", cuisine: "Universal", packs: "1kg · 5kg · 25kg", yieldPerKg: 130, pricePerKg: 540, shelf: "12 mo", note: "All-purpose gravy depth" },
+  { name: "Chhole Masala", img: "/images/products/chhole-masala.png", base: "#C41E1E", deep: "#6B0F0F", cuisine: "North Indian", packs: "1kg · 5kg", yieldPerKg: 120, pricePerKg: 560, shelf: "12 mo", note: "North-Indian tang" },
   { name: "Biryani Masala", base: "#8B5A2B", deep: "#4A2F16", cuisine: "North Indian", packs: "1kg · 5kg · 25kg", yieldPerKg: 110, pricePerKg: 680, shelf: "12 mo", note: "Layered & slow-built" },
-  { name: "Paneer Masala", base: "#E89A3D", deep: "#8A531E", cuisine: "North Indian", packs: "1kg · 5kg", yieldPerKg: 125, pricePerKg: 590, shelf: "12 mo", note: "Rich gravy base" },
-  { name: "Rajma Masala", base: "#A63A1F", deep: "#5C1E10", cuisine: "North Indian", packs: "1kg · 5kg", yieldPerKg: 120, pricePerKg: 550, shelf: "12 mo", note: "Punjabi comfort" },
-  { name: "Sambhar Masala", base: "#C4471D", deep: "#5C2210", cuisine: "South Indian", packs: "1kg · 5kg · 25kg", yieldPerKg: 140, pricePerKg: 520, shelf: "12 mo", note: "South-Indian staple" },
-  { name: "Pavbhaji Masala", base: "#D9481A", deep: "#7A2A0C", cuisine: "Street", packs: "1kg · 5kg", yieldPerKg: 135, pricePerKg: 530, shelf: "12 mo", note: "Mumbai street classic" },
-  { name: "Chat Masala", base: "#6B5A3A", deep: "#2E2416", cuisine: "Street", packs: "1kg · 5kg", yieldPerKg: 220, pricePerKg: 480, shelf: "12 mo", note: "The finishing sprinkle" },
-  { name: "Pani Puri Masala", base: "#6E7A45", deep: "#3A4224", cuisine: "Street", packs: "1kg", yieldPerKg: 240, pricePerKg: 460, shelf: "12 mo", note: "Sharp & tamarind-forward" },
-  { name: "Saffron", base: "#E8A33D", deep: "#A63A1F", cuisine: "Universal", packs: "1g · 5g · 10g", yieldPerKg: null, pricePerKg: null, shelf: "24 mo", note: "The rarest thread", threads: true },
-  { name: "Kesari Milk Masala", base: "#E8C468", deep: "#B5761E", cuisine: "Universal", packs: "1kg · 5kg", yieldPerKg: 180, pricePerKg: 720, shelf: "12 mo", note: "For festival milk" },
+  { name: "Paneer Masala", img: "/images/products/paneer-masala.png", base: "#E89A3D", deep: "#8A531E", cuisine: "North Indian", packs: "1kg · 5kg", yieldPerKg: 125, pricePerKg: 590, shelf: "12 mo", note: "Rich gravy base" },
+  { name: "Rajma Masala", img: "/images/products/rajma-masala.png", base: "#A63A1F", deep: "#5C1E10", cuisine: "North Indian", packs: "1kg · 5kg", yieldPerKg: 120, pricePerKg: 550, shelf: "12 mo", note: "Punjabi comfort" },
+  { name: "Sambhar Masala", img: "/images/products/sambhar-masala.png", base: "#C4471D", deep: "#5C2210", cuisine: "South Indian", packs: "1kg · 5kg · 25kg", yieldPerKg: 140, pricePerKg: 520, shelf: "12 mo", note: "South-Indian staple" },
+  { name: "Pavbhaji Masala", img: "/images/products/pavbhaji-masala.png", base: "#D9481A", deep: "#7A2A0C", cuisine: "Street", packs: "1kg · 5kg", yieldPerKg: 135, pricePerKg: 530, shelf: "12 mo", note: "Mumbai street classic" },
+  { name: "Chat Masala", img: "/images/products/chat-masala.png", base: "#6B5A3A", deep: "#2E2416", cuisine: "Street", packs: "1kg · 5kg", yieldPerKg: 220, pricePerKg: 480, shelf: "12 mo", note: "The finishing sprinkle" },
+  { name: "Pani Puri Masala", img: "/images/products/pani-puri-masala.png", base: "#6E7A45", deep: "#3A4224", cuisine: "Street", packs: "1kg", yieldPerKg: 240, pricePerKg: 460, shelf: "12 mo", note: "Sharp & tamarind-forward" },
+  { name: "Saffron", img: "/images/products/saffron.png", base: "#E8A33D", deep: "#A63A1F", cuisine: "Universal", packs: "1g · 5g · 10g", yieldPerKg: null, pricePerKg: null, shelf: "24 mo", note: "The rarest thread", threads: true },
+  { name: "Kesari Milk Masala", img: "/images/products/kesari-milk.png", base: "#E8C468", deep: "#B5761E", cuisine: "Universal", packs: "1kg · 5kg", yieldPerKg: 180, pricePerKg: 720, shelf: "12 mo", note: "For festival milk" },
 ];
 
 export const ORIGINS = [
@@ -38,9 +38,9 @@ export const ORIGINS = [
 export const HOME_NODE = { name: "Rainbow Blending House", place: "Chh. Sambhajinagar, Maharashtra", x: 38, y: 52 };
 
 export const RECIPES = [
-  { name: "Hotel-style Sambhar Base", base: "#C4471D", deep: "#5C2210", batch: "10L base · 80 plates", uses: "Sambhar Masala 320g", time: "45 min" },
-  { name: "Bulk Chhole (Catering)", base: "#C41E1E", deep: "#6B0F0F", batch: "8kg chana · 120 plates", uses: "Chhole Masala 640g", time: "70 min" },
-  { name: "Banquet Paneer Gravy", base: "#E89A3D", deep: "#8A531E", batch: "12L gravy · 100 plates", uses: "Paneer Masala 900g", time: "55 min" },
+  { name: "Hotel-style Sambhar Base", base: "#C4471D", deep: "#5C2210", batch: "10L base · 80 plates", uses: "Sambhar Masala 320g", time: "45 min", img: "/images/recipes/sambhar.jpg" },
+  { name: "Bulk Chhole (Catering)", base: "#C41E1E", deep: "#6B0F0F", batch: "8kg chana · 120 plates", uses: "Chhole Masala 640g", time: "70 min", img: "/images/recipes/chhole.jpg" },
+  { name: "Kitchen King Veg Base (Banquet)", base: "#E89A3D", deep: "#8A531E", batch: "12L gravy · 100 plates", uses: "Kitchen King Masala 900g", time: "55 min", img: "/images/recipes/kitchen-king.jpg" },
 ];
 
 export const TESTIMONIALS = [

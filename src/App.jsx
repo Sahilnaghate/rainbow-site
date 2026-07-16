@@ -386,12 +386,12 @@ export default function App() {
 
             <div className="relative rounded-3xl overflow-hidden" style={{ height: "min(62vw, 480px)", background: `radial-gradient(ellipse at 50% 30%, ${COLORS.redDeep}, ${COLORS.ink} 85%)`, boxShadow: "0 30px 70px rgba(122,20,20,0.28)" }}>
               <VortexErrorBoundary><SpiceVortexScene /></VortexErrorBoundary>
-              <div className="rs-float-chip hidden sm:block" style={{ position: "absolute", top: "6%", right: "4%", width: "104px", height: "104px", background: COLORS.paper, border: `2px solid ${COLORS.mustard}`, borderRadius: "14px", padding: "8px", "--r": "-6deg", boxShadow: "0 14px 30px rgba(0,0,0,0.35)", zIndex: 5 }}>
-                <SpiceMound id="chip-garam" base="#A9702E" deep="#5C3A1E" variant={0} />
+              <div className="rs-float-chip hidden sm:flex flex-col" style={{ position: "absolute", top: "6%", right: "4%", width: "104px", height: "116px", background: COLORS.paper, border: `2px solid ${COLORS.mustard}`, borderRadius: "14px", padding: "8px", "--r": "-6deg", boxShadow: "0 14px 30px rgba(0,0,0,0.35)", zIndex: 5 }}>
+                <img src="/images/products/garam-masala.png" alt="Garam Masala pack" style={{ width: "100%", height: "82px", objectFit: "contain" }} />
                 <p className="rs-eyebrow text-center mt-1" style={{ fontSize: "0.5rem", color: COLORS.inkDim }}>Garam Masala</p>
               </div>
-              <div className="rs-float-chip hidden sm:block" style={{ position: "absolute", bottom: "5%", left: "4%", width: "92px", height: "92px", background: COLORS.paper, border: `2px solid ${COLORS.mustard}`, borderRadius: "14px", padding: "8px", "--r": "5deg", boxShadow: "0 14px 30px rgba(0,0,0,0.35)", zIndex: 5, animationDelay: "1.4s" }}>
-                <SpiceMound id="chip-saffron" base="#E8A33D" deep="#A63A1F" variant={1} threads />
+              <div className="rs-float-chip hidden sm:flex flex-col" style={{ position: "absolute", bottom: "5%", left: "4%", width: "92px", height: "104px", background: COLORS.paper, border: `2px solid ${COLORS.mustard}`, borderRadius: "14px", padding: "8px", "--r": "5deg", boxShadow: "0 14px 30px rgba(0,0,0,0.35)", zIndex: 5, animationDelay: "1.4s" }}>
+                <img src="/images/products/saffron.png" alt="Saffron pack" style={{ width: "100%", height: "70px", objectFit: "contain" }} />
                 <p className="rs-eyebrow text-center mt-1" style={{ fontSize: "0.5rem", color: COLORS.inkDim }}>Saffron</p>
               </div>
             </div>
@@ -437,9 +437,13 @@ export default function App() {
                 <TiltCard className="rs-product-card rounded-2xl overflow-hidden h-full">
                   <div style={{ background: COLORS.paper, border: `1px solid ${tint(p.base, 0.4)}` }} className="rounded-2xl overflow-hidden h-full flex flex-col">
                     <div className="overflow-hidden relative" style={{ aspectRatio: "4/3", background: tint(p.base, 0.12) }}>
-                      <div className="rs-product-img" style={{ position: "absolute", inset: "4%" }}>
-                        <SpiceMound id={`product-${p.name.replace(/\s/g, "")}`} base={p.base} deep={p.deep} variant={i % 3} threads={!!p.threads} />
-                      </div>
+                      {p.img ? (
+                        <img src={p.img} alt={p.name} className="rs-product-img" style={{ position: "absolute", inset: "6%", width: "88%", height: "88%", objectFit: "contain", filter: "drop-shadow(0 10px 18px rgba(42,22,12,0.25))" }} />
+                      ) : (
+                        <div className="rs-product-img" style={{ position: "absolute", inset: "4%" }}>
+                          <SpiceMound id={`product-${p.name.replace(/\s/g, "")}`} base={p.base} deep={p.deep} variant={i % 3} threads={!!p.threads} />
+                        </div>
+                      )}
                       <span className="rs-eyebrow absolute top-3 left-3 px-2.5 py-1 rounded-full" style={{ fontSize: "0.52rem", background: tint(p.deep, 0.9), color: "#fff" }}>{p.cuisine}</span>
                     </div>
                     <div className="p-4 pt-3 flex flex-col gap-1.5 grow">
@@ -601,9 +605,13 @@ export default function App() {
                 <Reveal key={r.name} delay={i * 0.1}>
                   <TiltCard className="rounded-2xl overflow-hidden group">
                     <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "4/5", background: tint(r.base, 0.18) }}>
-                      <div className="rs-product-img" style={{ position: "absolute", inset: "-10%" }}>
-                        <SpiceMound id={`recipe-${i}`} base={r.base} deep={r.deep} variant={i} showFlecks={false} />
-                      </div>
+                      {r.img ? (
+                        <img src={r.img} alt={r.name} className="rs-product-img" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+                      ) : (
+                        <div className="rs-product-img" style={{ position: "absolute", inset: "-10%" }}>
+                          <SpiceMound id={`recipe-${i}`} base={r.base} deep={r.deep} variant={i} showFlecks={false} />
+                        </div>
+                      )}
                       <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, transparent 25%, ${tint(r.deep, 0.94)} 90%)` }} />
                       <div className="absolute bottom-0 left-0 right-0 p-6">
                         <h3 className="rs-display" style={{ fontSize: "1.35rem", color: "#fff", fontStyle: "italic" }}>{r.name}</h3>
