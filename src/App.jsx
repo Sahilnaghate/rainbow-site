@@ -2,13 +2,13 @@ import React, { useEffect, useMemo, useState } from "react";
 import { COLORS, tint, LINKS } from "./theme.js";
 import { Reveal, TiltCard, GrainDefs, SpiceMound, KenBurns } from "./components.jsx";
 import {
-  TRUST_COUNTERS, CUISINES, PRODUCTS, ORIGINS, HOME_NODE, RECIPES,
+  TRUST_COUNTERS, CUISINES, PRODUCTS, RECIPES,
   TESTIMONIALS, TIMELINE, DISTRIBUTOR, FAQS,
 } from "./data.js";
 
 const NAV = [
   { label: "Products", href: "#products" },
-  { label: "Sourcing", href: "#sourcing" },
+  { label: "Export", href: "#export" },
   { label: "Distributors", href: "#distributors" },
   { label: "Story", href: "#story" },
   { label: "Recipes", href: "#recipes" },
@@ -17,15 +17,6 @@ const NAV = [
 
 const inr = (n) => `₹${Number(n).toLocaleString("en-IN")}`;
 
-// Stylised India silhouette (decorative, not a survey map) in a 100x110 viewBox.
-const INDIA_PATH =
-  "M36,3 C33,7 30,10 29,13 C26,17 23,20 20,25 C17,29 13,32 11,35 C9,38 5,40 5,43 " +
-  "C7,46 9,47 10,49 C12,47 13,46 15,47 C15,50 16,52 17,53 C19,56 21,58 22,60 " +
-  "C24,64 26,67 27,70 C29,74 31,78 32,82 C33,87 35,92 37,97 C39,93 41,89 43,85 " +
-  "C45,81 48,77 51,72 C54,68 56,64 58,61 C60,57 62,53 64,50 C65,48 66,46 67,44 " +
-  "C70,43 72,42 74,41 C78,40 81,38 84,38 C86,38 89,38 90,40 C88,42 86,43 83,44 " +
-  "C80,45 77,46 74,46 C72,46 70,46 68,45 C67,44 66,43 65,42 C63,39 60,35 58,32 " +
-  "C55,28 53,25 50,22 C48,18 45,15 43,12 C41,9 38,6 36,3 Z";
 
 const HERO_SLIDES = [
   "/images/hero/garam-masal.jpg",
@@ -68,7 +59,7 @@ function IntroSplash({ onDone }) {
         Professional Kitchen Masala Partner
       </p>
       <p className="rs-body rs-intro-tag" style={{ color: "rgba(255,246,231,0.55)", fontSize: "0.72rem", marginTop: "0.5rem", animationDelay: "1.1s" }}>
-        since 1962 · Chh. Sambhajinagar
+        since 1956 · Chh. Sambhajinagar
       </p>
       <span className="rs-body absolute bottom-6 right-8" style={{ color: "rgba(255,246,231,0.45)", fontSize: "0.72rem" }}>click to skip →</span>
     </div>
@@ -131,6 +122,48 @@ function BulkInquiryModal({ open, onClose }) {
         </div>
         <p className="rs-body mt-4" style={{ fontSize: "0.75rem", color: COLORS.inkDim }}>We reply within one working day. Minimum direct order 25kg — smaller needs are routed to your nearest distributor.</p>
       </div>
+    </div>
+  );
+}
+
+/* ============ Export lead form (v2 brief) ============ */
+function ExportForm() {
+  const [f, setF] = useState({ company: "", country: "", products: "", volume: "" });
+  const msg = encodeURIComponent(
+    `Export enquiry — Rainbow Masala\nCompany: ${f.company}\nCountry: ${f.country}\nProducts: ${f.products}\nMonthly volume: ${f.volume}`
+  );
+  const field = (label, key, placeholder) => (
+    <label className="block">
+      <span className="rs-eyebrow" style={{ fontSize: "0.6rem", color: COLORS.inkDim }}>{label}</span>
+      <input
+        value={f[key]}
+        onChange={(e) => setF({ ...f, [key]: e.target.value })}
+        placeholder={placeholder}
+        className="rs-body mt-1 w-full rounded-lg px-3 py-2.5"
+        style={{ border: `1.5px solid ${tint(COLORS.ink, 0.18)}`, background: COLORS.paper, fontSize: "0.95rem", color: COLORS.ink }}
+      />
+    </label>
+  );
+  return (
+    <div className="rounded-2xl p-7 md:p-8" style={{ background: COLORS.paper, border: `1px solid ${tint(COLORS.ink, 0.12)}`, boxShadow: "0 20px 50px rgba(42,22,12,0.10)" }}>
+      <p className="rs-eyebrow" style={{ fontSize: "0.65rem", color: COLORS.red }}>Export lead form</p>
+      <div className="mt-4 grid gap-3">
+        {field("Company", "company", "Importer / distributor name")}
+        <div className="grid grid-cols-2 gap-3">
+          {field("Country", "country", "UAE, UK, USA…")}
+          {field("Monthly volume", "volume", "e.g. 2 tonnes")}
+        </div>
+        {field("Products of interest", "products", "Garam masala, sambhar masala…")}
+      </div>
+      <div className="mt-6 flex flex-wrap gap-3">
+        <a href={`${LINKS.whatsapp}?text=${msg}`} target="_blank" rel="noreferrer" className="rs-btn px-6 py-3 rounded-full" style={{ background: "#1FA855", color: "#fff", fontSize: "0.78rem" }}>
+          Send on WhatsApp
+        </a>
+        <a href={`mailto:${LINKS.email}?subject=Export enquiry — ${encodeURIComponent(f.country || "International")}&body=${msg}`} className="rs-btn px-6 py-3 rounded-full" style={{ border: `2px solid ${COLORS.red}`, color: COLORS.red, fontSize: "0.78rem" }}>
+          Send by Email
+        </a>
+      </div>
+      <p className="rs-body mt-4" style={{ fontSize: "0.75rem", color: COLORS.inkDim }}>Export desk replies within two working days with pricing, MOQs and documentation checklist.</p>
     </div>
   );
 }
@@ -227,84 +260,6 @@ function CostPerPlate() {
   );
 }
 
-/* ============ Sourcing route map ============ */
-function SourcingMap() {
-  const [active, setActive] = useState(0);
-  return (
-    <div className="grid md:grid-cols-5 gap-8 items-stretch mt-14">
-      <div className="md:col-span-3 relative rounded-3xl overflow-hidden p-4" style={{ background: `radial-gradient(ellipse at 50% 20%, ${COLORS.redDeep}, ${COLORS.ink} 80%)`, minHeight: "460px" }}>
-        {/* aspect-locked wrapper so SVG map coords line up with pin percentages */}
-        <div className="relative mx-auto h-full" style={{ aspectRatio: "100/110", maxWidth: "100%" }}>
-          <svg viewBox="0 0 100 110" className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <defs>
-              <clipPath id="india-clip"><path d={INDIA_PATH} /></clipPath>
-            </defs>
-            <path d={INDIA_PATH} fill="rgba(250,162,25,0.09)" stroke="rgba(250,162,25,0.55)" strokeWidth="0.6" strokeLinejoin="round" />
-            <g clipPath="url(#india-clip)">
-              {[...Array(22)].map((_, r) =>
-                [...Array(20)].map((_, c) => (
-                  <circle key={`${r}-${c}`} cx={2.5 + c * 5} cy={2.5 + r * 5} r="0.32" fill="rgba(255,246,231,0.16)" />
-                ))
-              )}
-            </g>
-            {ORIGINS.map((org, i) => (
-              <path
-                key={org.name}
-                d={`M${org.x},${org.y} Q${(org.x + HOME_NODE.x) / 2 + (i % 2 ? 5 : -5)},${(org.y + HOME_NODE.y) / 2 - 6} ${HOME_NODE.x},${HOME_NODE.y}`}
-                stroke={i === active ? COLORS.mustard : "rgba(250,162,25,0.3)"}
-                strokeWidth={i === active ? 0.7 : 0.4}
-                strokeDasharray="1.6 1.6"
-                fill="none"
-              />
-            ))}
-            <circle cx={HOME_NODE.x} cy={HOME_NODE.y} r="2.2" fill={COLORS.mustard} />
-            <circle cx={HOME_NODE.x} cy={HOME_NODE.y} r="3.8" fill="none" stroke={COLORS.mustard} strokeWidth="0.4" opacity="0.6" />
-          </svg>
-          {ORIGINS.map((org, i) => (
-            <button
-              key={org.name}
-              onClick={() => setActive(i)}
-              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
-              style={{
-                left: `${org.x}%`, top: `${(org.y / 110) * 100}%`, width: i === active ? "20px" : "14px", height: i === active ? "20px" : "14px",
-                background: org.base, border: `2.5px solid ${i === active ? COLORS.mustard : "rgba(255,246,231,0.6)"}`,
-                boxShadow: i === active ? `0 0 18px ${tint(COLORS.mustard, 0.8)}` : "none", transition: "all 0.3s ease", cursor: "pointer",
-              }}
-              aria-label={`${org.name} — ${org.place}`}
-            />
-          ))}
-        </div>
-        <div className="absolute left-4 bottom-4 rs-body" style={{ fontSize: "0.7rem", color: "rgba(255,246,231,0.7)" }}>
-          ● {HOME_NODE.name}, {HOME_NODE.place}
-        </div>
-        <div className="absolute right-4 top-4 rs-body" style={{ fontSize: "0.62rem", color: "rgba(255,246,231,0.45)" }}>
-          Stylised map · not to scale
-        </div>
-      </div>
-      <div className="md:col-span-2 flex flex-col gap-3">
-        {ORIGINS.map((org, i) => (
-          <button
-            key={org.name}
-            onClick={() => setActive(i)}
-            className="text-left rounded-xl px-4 py-3 transition-all"
-            style={{
-              background: i === active ? COLORS.paper : "transparent",
-              border: `1.5px solid ${i === active ? org.base : tint(COLORS.ink, 0.12)}`,
-              boxShadow: i === active ? "0 10px 26px rgba(42,22,12,0.12)" : "none",
-            }}
-          >
-            <div className="flex items-center gap-3">
-              <span className="h-3 w-3 rounded-full shrink-0" style={{ background: org.base }} />
-              <span className="rs-display" style={{ fontSize: "1.02rem", color: COLORS.ink, fontWeight: 600 }}>{org.name}</span>
-              <span className="rs-body ml-auto" style={{ fontSize: "0.75rem", color: COLORS.inkDim }}>{org.place}</span>
-            </div>
-            {i === active && <p className="rs-body mt-2" style={{ fontSize: "0.85rem", color: COLORS.inkDim, lineHeight: 1.6 }}>{org.detail}</p>}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 /* ============ FAQ accordion ============ */
 function FAQ() {
@@ -330,6 +285,7 @@ export default function App() {
   const [navOpen, setNavOpen] = useState(false);
   const [bulkOpen, setBulkOpen] = useState(false);
   const [availOpen, setAvailOpen] = useState(false);
+  const [zoom, setZoom] = useState(null); // { img, name } — zoomable product picture (v2 brief)
   const [cuisine, setCuisine] = useState("All");
   const [intro, setIntro] = useState(() => {
     if (typeof window === "undefined") return false;
@@ -389,6 +345,13 @@ export default function App() {
         {intro && <IntroSplash onDone={closeIntro} />}
         <BulkInquiryModal open={bulkOpen} onClose={() => setBulkOpen(false)} />
         <AvailabilityModal open={availOpen} onClose={(next) => { setAvailOpen(false); if (next === "bulk") setBulkOpen(true); }} />
+        {zoom && (
+          <div className="fixed inset-0 z-[95] flex flex-col items-center justify-center px-6 cursor-zoom-out" style={{ background: "rgba(42,22,12,0.82)", backdropFilter: "blur(6px)" }} onClick={() => setZoom(null)}>
+            <img src={zoom.img} alt={zoom.name} style={{ maxWidth: "min(90vw, 560px)", maxHeight: "72vh", objectFit: "contain", filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.5))" }} />
+            <p className="rs-display mt-5" style={{ color: "#FFF6E7", fontSize: "1.3rem", fontWeight: 600 }}>{zoom.name}</p>
+            <p className="rs-body mt-1" style={{ color: "rgba(255,246,231,0.6)", fontSize: "0.8rem" }}>click anywhere to close</p>
+          </div>
+        )}
 
         {/* floating WhatsApp */}
         <a
@@ -442,7 +405,7 @@ export default function App() {
         <section className="relative pt-32 md:pt-40 pb-14 px-6 md:px-10 max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <Reveal><Eyebrow>Professional kitchen masala partner · since 1962</Eyebrow></Reveal>
+              <Reveal><Eyebrow>Professional kitchen masala partner · since 1956</Eyebrow></Reveal>
               <Reveal delay={0.08}>
                 <h1 className="rs-display mt-5" style={{ fontSize: "clamp(2.5rem, 5.6vw, 4.1rem)", lineHeight: 1.03, fontWeight: 600, color: COLORS.ink }}>
                   The same taste,<br />
@@ -525,7 +488,7 @@ export default function App() {
               <Reveal key={p.name} delay={(i % 4) * 0.05}>
                 <TiltCard className="rs-product-card rounded-2xl overflow-hidden h-full">
                   <div style={{ background: COLORS.paper, border: `1px solid ${tint(p.base, 0.4)}` }} className="rounded-2xl overflow-hidden h-full flex flex-col">
-                    <div className="overflow-hidden relative" style={{ aspectRatio: "4/3", background: tint(p.base, 0.12) }}>
+                    <div className="overflow-hidden relative" style={{ aspectRatio: "4/3", background: tint(p.base, 0.12), cursor: p.img ? "zoom-in" : "default" }} onClick={() => p.img && setZoom({ img: p.img, name: p.name })}>
                       {p.img ? (
                         <img src={p.img} alt={p.name} className="rs-product-img" style={{ position: "absolute", inset: "6%", width: "88%", height: "88%", objectFit: "contain", filter: "drop-shadow(0 10px 18px rgba(42,22,12,0.25))" }} />
                       ) : (
@@ -551,17 +514,27 @@ export default function App() {
           </div>
         </section>
 
-        {/* ===================== 3 · SOURCING TRANSPARENCY ===================== */}
-        <section id="sourcing" className="px-6 md:px-10 py-24 md:py-28" style={{ background: tint(COLORS.mustard, 0.1) }}>
-          <div className="max-w-7xl mx-auto">
-            <Reveal><Eyebrow center>Sourcing transparency</Eyebrow></Reveal>
-            <Reveal delay={0.06}><H2 center>Six origins. One blending house. Nothing hidden.</H2></Reveal>
-            <Reveal delay={0.12}>
-              <p className="rs-body text-center mt-5 max-w-xl mx-auto" style={{ color: COLORS.inkDim, lineHeight: 1.7 }}>
-                Every raw lot arrives with a farm region, a mandi record and a lab check — and every finished pack carries a batch code that traces back to them.
-              </p>
-            </Reveal>
-            <SourcingMap />
+
+        {/* ===================== EXPORT (v2 brief) ===================== */}
+        <section id="export" className="px-6 md:px-10 py-24 md:py-28" style={{ background: tint(COLORS.mustard, 0.1) }}>
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <Reveal><Eyebrow>Export enquiries</Eyebrow></Reveal>
+              <Reveal delay={0.08}><H2>Rainbow, beyond India.</H2></Reveal>
+              <Reveal delay={0.16}>
+                <p className="rs-body mt-6 max-w-md" style={{ color: COLORS.inkDim, fontSize: "1.02rem", lineHeight: 1.75 }}>
+                  Branded and private-label masalas for importers, ethnic-food distributors and food-service groups. FSSAI-licensed facility, per-batch lab COA, export documentation and FOB/CIF support from Mumbai port.
+                </p>
+              </Reveal>
+              <Reveal delay={0.22}>
+                <ul className="rs-body mt-7 grid gap-2.5" style={{ color: COLORS.inkDim, fontSize: "0.95rem" }}>
+                  {["Private-label & contract blending", "Per-batch lab COA + traceability", "Retail packs and 25kg bulk", "Export documentation handled end-to-end"].map((s) => (
+                    <li key={s} className="flex items-center gap-3"><span style={{ color: COLORS.red }}>✦</span>{s}</li>
+                  ))}
+                </ul>
+              </Reveal>
+            </div>
+            <Reveal delay={0.15}><ExportForm /></Reveal>
           </div>
         </section>
 

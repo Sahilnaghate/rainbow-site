@@ -15,7 +15,8 @@ export const PRODUCTS = [
   { name: "Garam Masala", img: "/images/products/garam-masala.png", base: "#A9702E", deep: "#5C3A1E", cuisine: "Universal", packs: "1kg · 5kg · 25kg", yieldPerKg: 160, pricePerKg: 620, shelf: "12 mo", note: "The house finishing blend" },
   { name: "Kitchen King Masala", img: "/images/products/kitchen-king.png", base: "#F2A900", deep: "#8A5F0E", cuisine: "Universal", packs: "1kg · 5kg · 25kg", yieldPerKg: 130, pricePerKg: 540, shelf: "12 mo", note: "All-purpose gravy depth" },
   { name: "Chhole Masala", img: "/images/products/chhole-masala.png", base: "#C41E1E", deep: "#6B0F0F", cuisine: "North Indian", packs: "1kg · 5kg", yieldPerKg: 120, pricePerKg: 560, shelf: "12 mo", note: "North-Indian tang" },
-  { name: "Biryani Masala", base: "#8B5A2B", deep: "#4A2F16", cuisine: "North Indian", packs: "1kg · 5kg · 25kg", yieldPerKg: 110, pricePerKg: 680, shelf: "12 mo", note: "Layered & slow-built" },
+  // Biryani Masala parked until the client supplies a pack photo (old site has none):
+  // { name: "Biryani Masala", base: "#8B5A2B", deep: "#4A2F16", cuisine: "North Indian", packs: "1kg · 5kg · 25kg", yieldPerKg: 110, pricePerKg: 680, shelf: "12 mo", note: "Layered & slow-built" },
   { name: "Paneer Masala", img: "/images/products/paneer-masala.png", base: "#E89A3D", deep: "#8A531E", cuisine: "North Indian", packs: "1kg · 5kg", yieldPerKg: 125, pricePerKg: 590, shelf: "12 mo", note: "Rich gravy base" },
   { name: "Rajma Masala", img: "/images/products/rajma-masala.png", base: "#A63A1F", deep: "#5C1E10", cuisine: "North Indian", packs: "1kg · 5kg", yieldPerKg: 120, pricePerKg: 550, shelf: "12 mo", note: "Punjabi comfort" },
   { name: "Sambhar Masala", img: "/images/products/sambhar-masala.png", base: "#C4471D", deep: "#5C2210", cuisine: "South Indian", packs: "1kg · 5kg · 25kg", yieldPerKg: 140, pricePerKg: 520, shelf: "12 mo", note: "South-Indian staple" },
@@ -50,7 +51,7 @@ export const TESTIMONIALS = [
 ];
 
 export const TIMELINE = [
-  { year: "1962", text: "A single spice shop opens in Aurangpura." },
+  { year: "1956", text: "A single spice shop opens in Aurangpura." },
   { year: "1988", text: "First stone-ground blends sold under the Rainbow name." },
   { year: "2005", text: "Dedicated blending unit; hotels become regular buyers." },
   { year: "2018", text: "Batch coding and QC lab introduced." },
