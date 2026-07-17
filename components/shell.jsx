@@ -112,6 +112,35 @@ function AvailabilityModal({ onClose }) {
   );
 }
 
+function BestSellerPopup({ onClose }) {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const onMove = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    setTilt({ x: ((e.clientX - r.left) / r.width - 0.5) * 14, y: ((e.clientY - r.top) / r.height - 0.5) * -10 });
+  };
+  return (
+    <div className="fixed inset-0 z-[150] flex items-center justify-center px-4" style={{ background: "rgba(42,22,12,0.7)", backdropFilter: "blur(6px)" }} onClick={onClose}>
+      <div onMouseMove={onMove} onClick={(e) => e.stopPropagation()} className="relative w-full max-w-md rounded-3xl overflow-hidden p-8 text-center"
+        style={{ background: `radial-gradient(ellipse at 50% 20%, ${COLORS.redDeep}, ${COLORS.ink} 85%)`, boxShadow: "0 40px 100px rgba(0,0,0,0.5)", border: "1px solid rgba(255,255,255,0.15)" }}>
+        {[...Array(10)].map((_, i) => (
+          <span key={i} className="rs-spark" style={{ "--a": `${(i / 10) * 360}deg`, "--d": `${110 + (i % 3) * 50}px`, background: i % 2 ? COLORS.mustard : "#fff", animationDelay: `${0.3 + i * 0.06}s`, top: "38%" }} />
+        ))}
+        <button onClick={onClose} aria-label="Close" className="absolute top-4 right-5 rs-body text-xl" style={{ color: "rgba(255,255,255,0.7)" }}>✕</button>
+        <p className="rs-eyebrow" style={{ fontSize: "0.66rem", color: COLORS.mustard }}>★ Our best seller</p>
+        <div className="rs-float-chip mx-auto mt-4" style={{ width: "58%", transform: `perspective(700px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`, transition: "transform 0.15s ease-out", filter: "drop-shadow(0 24px 40px rgba(0,0,0,0.5))" }}>
+          <img src="/images/products/kitchen-king.png" alt="Kitchen King Masala" style={{ width: "100%", height: "auto" }} />
+        </div>
+        <h3 className="rs-display mt-5" style={{ fontSize: "1.7rem", color: "#fff", fontWeight: 600 }}>Kitchen King Masala</h3>
+        <p className="rs-body mt-2" style={{ color: "rgba(255,255,255,0.85)", fontSize: "0.92rem" }}>All-purpose royal depth for every gravy — the blend Indian kitchens reorder most.</p>
+        <div className="mt-6 flex justify-center gap-3">
+          <Link href="/products" onClick={onClose} className="rs-btn px-6 py-3 rounded-full" style={{ background: "#fff", color: COLORS.red, fontSize: "0.75rem" }}>View product</Link>
+          <a href={`${LINKS.whatsapp}?text=${encodeURIComponent("Hi! I want to order Kitchen King Masala.")}`} target="_blank" rel="noreferrer" className="rs-btn px-6 py-3 rounded-full" style={{ background: "#1FA855", color: "#fff", fontSize: "0.75rem" }}>Order on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function IntroSplash({ onDone }) {
   const [leaving, setLeaving] = useState(false);
   useEffect(() => {
@@ -225,15 +254,22 @@ export default function Shell({ children }) {
   const [availOpen, setAvailOpen] = useState(false);
   const [zoom, setZoom] = useState(null);
   const [intro, setIntro] = useState(false);
+  const [bestSeller, setBestSeller] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     if (pathname === "/" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches && !sessionStorage.getItem("rs-intro-seen")) setIntro(true);
+    else if (pathname === "/" && !sessionStorage.getItem("rs-bestseller-seen")) setTimeout(() => setBestSeller(true), 1500);
     return () => window.removeEventListener("scroll", onScroll);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const closeIntro = () => { setIntro(false); try { sessionStorage.setItem("rs-intro-seen", "1"); } catch {} };
+  const closeIntro = () => {
+    setIntro(false);
+    try { sessionStorage.setItem("rs-intro-seen", "1"); } catch {}
+    try { if (pathname === "/" && !sessionStorage.getItem("rs-bestseller-seen")) setTimeout(() => setBestSeller(true), 900); } catch {}
+  };
+  const closeBestSeller = () => { setBestSeller(false); try { sessionStorage.setItem("rs-bestseller-seen", "1"); } catch {} };
 
   const ctx = { openBulk: () => setBulkOpen(true), openAvail: () => setAvailOpen(true), setZoom };
 
@@ -242,6 +278,7 @@ export default function Shell({ children }) {
       <div style={{ background: COLORS.cream, color: COLORS.ink }} className="rs-root min-h-screen w-full overflow-x-hidden">
         <GrainDefs />
         {intro && <IntroSplash onDone={closeIntro} />}
+        {bestSeller && !intro && <BestSellerPopup onClose={closeBestSeller} />}
         {bulkOpen && <BulkInquiryModal onClose={() => setBulkOpen(false)} />}
         {availOpen && <AvailabilityModal onClose={(next) => { setAvailOpen(false); if (next === "bulk") setBulkOpen(true); }} />}
         {zoom && (
@@ -259,7 +296,7 @@ export default function Shell({ children }) {
         </a>
 
         <header className="fixed top-0 left-0 right-0 z-50" style={{
-          background: scrolled ? "rgba(255,246,231,0.94)" : "transparent",
+          background: scrolled ? "rgba(255,255,255,0.95)" : "transparent",
           backdropFilter: scrolled ? "blur(10px)" : "none",
           borderBottom: scrolled ? `2px solid ${COLORS.red}` : "1px solid transparent",
           transition: "all 0.4s ease",

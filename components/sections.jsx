@@ -87,6 +87,33 @@ export function Marquee() {
   );
 }
 
+/* ---------- glass "what we cater" panel (v3 item 5) ---------- */
+export function CaterPanel() {
+  const CHIPS = [
+    ["🏨", "Hotels"], ["🍽️", "Restaurants"], ["🎪", "Caterers"], ["🏠", "Home kitchens"], ["🚚", "Distributors"], ["🌍", "Export"],
+  ];
+  return (
+    <section className="px-6 md:px-10 py-16" style={{ background: `linear-gradient(140deg, ${COLORS.red}, ${COLORS.redDeep})` }}>
+      <div className="max-w-7xl mx-auto text-center">
+        <Reveal>
+          <p className="rs-display" style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", color: "#fff", fontWeight: 600 }}>
+            One blending house for every plate — homes to five-star banquets.
+          </p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <div className="flex flex-wrap justify-center gap-3 mt-7">
+            {CHIPS.map(([e, label]) => (
+              <span key={label} className="rs-body flex items-center gap-2 px-5 py-2.5 rounded-full" style={{ background: "rgba(255,255,255,0.14)", border: "1px solid rgba(255,255,255,0.35)", backdropFilter: "blur(10px)", color: "#fff", fontSize: "0.9rem" }}>
+                <span>{e}</span>{label}
+              </span>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- cost-per-plate widget ---------- */
 export function CostPerPlate() {
   // Client feedback: no ₹ pricing on the site (rates move seasonally) — yield-only guide.
