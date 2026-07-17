@@ -35,6 +35,33 @@
 .rs-kb-active { animation: rs-kb 6.5s ease-out both; }
 @keyframes rs-kb { from { transform: scale(1.02); } to { transform: scale(1.14); } }
 
+/* ── premium food treatment: rising steam / aroma wisps (v3 items 2 & 9) ── */
+.rs-steam { position: absolute; left: 0; right: 0; bottom: 0; height: 78%; pointer-events: none; overflow: hidden; z-index: 2; }
+.rs-steam span {
+  position: absolute; bottom: -12%;
+  width: 24%; height: 60%; border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 100%, rgba(255,255,255,0.42), rgba(255,255,255,0) 70%);
+  filter: blur(14px);
+  opacity: 0;
+  animation: rs-steam-rise var(--rs-steam-dur, 6s) ease-in-out infinite;
+  animation-delay: var(--rs-steam-delay, 0s);
+}
+@keyframes rs-steam-rise {
+  0%   { transform: translateY(0) translateX(0) scale(0.7); opacity: 0; }
+  20%  { opacity: 0.5; }
+  55%  { opacity: 0.32; }
+  100% { transform: translateY(-135%) translateX(var(--rs-steam-drift, 10px)) scale(1.5); opacity: 0; }
+}
+
+/* ── 3D floating pack (item 2 / item 10 hero) ── */
+.rs-float3d { animation: rs-float3d 5.5s ease-in-out infinite; transform-style: preserve-3d; }
+@keyframes rs-float3d {
+  0%, 100% { transform: translateY(0) rotateZ(-1deg); }
+  50%      { transform: translateY(-18px) rotateZ(1.5deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .rs-marquee-track, .rs-kb-active, .rs-spark, .rs-intro-logo, .rs-intro-tag { animation: none; }
+  .rs-marquee-track, .rs-kb-active, .rs-spark, .rs-intro-logo, .rs-intro-tag,
+  .rs-steam span, .rs-float3d { animation: none; }
+  .rs-steam span { opacity: 0.22; }
 }

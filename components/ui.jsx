@@ -157,3 +157,54 @@ export function KenBurns({ images, interval = 4500 }) {
   );
 }
 
+/* ── rising steam / aroma over a food image (v3 items 2 & 9) ── */
+export function SteamLayer({ count = 5, opacity = 1 }) {
+  const wisps = Array.from({ length: count }, (_, i) => {
+    const left = 8 + (i * 84) / (count - 1 || 1); // spread across the dish
+    const dur = 5.5 + (i % 3) * 1.4;
+    const delay = -(i * 1.3);
+    const drift = (i % 2 ? 1 : -1) * (8 + (i % 3) * 7);
+    return { left, dur, delay, drift, i };
+  });
+  return (
+    <div className="rs-steam" style={{ opacity }} aria-hidden="true">
+      {wisps.map((w) => (
+        <span
+          key={w.i}
+          style={{
+            left: `${w.left}%`,
+            marginLeft: "-12%",
+            "--rs-steam-dur": `${w.dur}s`,
+            "--rs-steam-delay": `${w.delay}s`,
+            "--rs-steam-drift": `${w.drift}px`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+/* ── premium signature-dish showcase: framed real food photo with aroma steam
+   + a 3D floating pack (v3 item 2) ── */
+export function SignatureDish({ dish, pack, badge, title, sub, deep = "#5C2210" }) {
+  return (
+    <div className="relative rounded-3xl overflow-hidden" style={{ aspectRatio: "1 / 1", boxShadow: "0 40px 90px rgba(42,22,12,0.35)" }}>
+      <img src={dish} alt={title} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+      {/* warm grade + bottom vignette */}
+      <div className="absolute inset-0" style={{ background: `radial-gradient(120% 90% at 50% 20%, rgba(0,0,0,0) 45%, rgba(20,8,4,0.5) 100%), linear-gradient(180deg, transparent 40%, ${deep}f2 96%)` }} />
+      <SteamLayer count={6} />
+      {/* floating pack */}
+      {pack && (
+        <div className="absolute rs-float3d" style={{ right: "7%", bottom: "9%", width: "34%", zIndex: 3, filter: "drop-shadow(0 26px 34px rgba(0,0,0,0.55))" }}>
+          <img src={pack} alt="" aria-hidden="true" style={{ width: "100%", height: "auto", display: "block" }} />
+        </div>
+      )}
+      <div className="absolute left-0 right-0 bottom-0 p-7" style={{ zIndex: 4 }}>
+        {badge && <span className="rs-eyebrow" style={{ fontSize: "0.62rem", color: "#FAA219" }}>{badge}</span>}
+        <h3 className="rs-display mt-1" style={{ fontSize: "clamp(1.5rem, 3vw, 2.1rem)", color: "#fff", fontWeight: 600, fontStyle: "italic" }}>{title}</h3>
+        {sub && <p className="rs-body mt-2 max-w-sm" style={{ fontSize: "0.85rem", color: "rgba(255,246,231,0.9)" }}>{sub}</p>}
+      </div>
+    </div>
+  );
+}
+

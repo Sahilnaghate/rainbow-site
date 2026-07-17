@@ -1,4 +1,4 @@
-import { Hero, Marquee, CaterPanel, ProductsSection, DistributorSection, FounderSection, TestimonialsSection, AvailabilityBand } from "../components/sections.jsx";
+import { Hero, Marquee, CaterPanel, SignatureShowcase, ProductsSection, DistributorSection, FounderSection, TestimonialsSection, AvailabilityBand } from "../components/sections.jsx";
 
 export default function HomePage() {
   return (
@@ -6,6 +6,7 @@ export default function HomePage() {
       <Hero />
       <Marquee />
       <CaterPanel />
+      <SignatureShowcase />
       <ProductsSection featured />
       <TestimonialsSection />
       <DistributorSection />

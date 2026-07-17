@@ -2,7 +2,7 @@
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import { COLORS, tint, LINKS } from "../lib/theme.js";
-import { Reveal, TiltCard, SpiceMound, KenBurns } from "./ui.jsx";
+import { Reveal, TiltCard, SpiceMound, KenBurns, SteamLayer, SignatureDish } from "./ui.jsx";
 import { useShell, Eyebrow, H2, Field } from "./shell.jsx";
 import { CATEGORIES, CUISINES, PRODUCTS, RECIPES, TIMELINE, DISTRIBUTOR, HORECA_SOLUTIONS } from "../lib/data.js";
 import { useCounters, useTestimonials } from "../lib/cms.js";
@@ -109,6 +109,47 @@ export function CaterPanel() {
             ))}
           </div>
         </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- signature-dish showcase (v3 item 2) ---------- */
+export function SignatureShowcase() {
+  return (
+    <section className="px-6 md:px-10 py-24 md:py-28" style={{ background: "#fff" }}>
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <Reveal>
+          <SignatureDish
+            dish="/images/recipes/kitchen-king.jpg"
+            pack="/images/products/kitchen-king.png"
+            badge="★ Signature blend"
+            title="Kitchen King, plated."
+            sub="Real gravy cooked on Rainbow Kitchen King — the aroma, the colour, the royal depth that keeps kitchens reordering."
+            deep="#8A531E"
+          />
+        </Reveal>
+        <div>
+          <Reveal><Eyebrow>The masala, on the plate</Eyebrow></Reveal>
+          <Reveal delay={0.06}>
+            <H2>You don&apos;t taste a spice pack. You taste the dish.</H2>
+          </Reveal>
+          <Reveal delay={0.14}>
+            <p className="rs-body mt-6 max-w-md" style={{ color: COLORS.inkDim, fontSize: "1.02rem", lineHeight: 1.75 }}>
+              Every Rainbow blend is built for the plate it ends up on — colour that holds, aroma that carries across a banquet hall, and the same result whether it&apos;s batch one or batch one thousand.
+            </p>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <div className="mt-8 grid grid-cols-3 gap-4">
+              {[["Aroma-locked", "sealed at blending"], ["Colour-true", "no artificial dye"], ["Batch-coded", "every single pack"]].map(([t, s]) => (
+                <div key={t} className="rounded-xl p-4" style={{ background: "#fff", border: `1.5px solid ${tint(COLORS.red, 0.25)}`, borderTop: `4px solid ${COLORS.red}` }}>
+                  <p className="rs-display" style={{ fontSize: "0.98rem", color: COLORS.red, fontWeight: 600 }}>{t}</p>
+                  <p className="rs-body mt-1" style={{ fontSize: "0.72rem", color: COLORS.inkDim }}>{s}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -417,7 +458,10 @@ export function RecipesSection() {
               <TiltCard className="rounded-2xl overflow-hidden group">
                 <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "4/5", background: tint(r.base, 0.18) }}>
                   {r.img ? (
-                    <img src={r.img} alt={r.name} className="rs-product-img" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+                    <>
+                      <img src={r.img} alt={r.name} className="rs-product-img" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+                      <SteamLayer count={4} opacity={0.9} />
+                    </>
                   ) : (
                     <div className="rs-product-img" style={{ position: "absolute", inset: "-10%" }}>
                       <SpiceMound id={`recipe-${i}`} base={r.base} deep={r.deep} variant={i} showFlecks={false} />
