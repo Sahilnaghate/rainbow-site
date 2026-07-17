@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import { supabase, uploadMedia, invalidate } from "../../lib/cms.js";
 import { COLORS, tint, LINKS } from "../../lib/theme.js";
-import { TRUST_COUNTERS } from "../../lib/data.js";
+import { TRUST_COUNTERS, CATEGORIES, CUISINES } from "../../lib/data.js";
 
 const card = { background: "#fff", border: `1px solid ${tint(COLORS.ink, 0.12)}`, borderRadius: "16px" };
 const input = { border: `1.5px solid ${tint(COLORS.ink, 0.18)}`, background: "#fff", fontSize: "0.92rem", color: COLORS.ink, borderRadius: "10px", padding: "9px 12px", width: "100%" };
@@ -190,7 +190,206 @@ function TestimonialsTab() {
   );
 }
 
-const TABS = [["counters", "Counters"], ["gallery", "Gallery"], ["testimonials", "Testimonials"]];
+/* ---------- Products tab ---------- */
+function ProductsTab() {
+  const empty = { name: "", img: "", category: "Premium Blends", cuisine: "Universal", packs: "", yield_per_kg: "", shelf: "12 mo", note: "", base: "#A9702E", deep: "#5C3A1E", active: true };
+  const [items, setItems] = useState([]);
+  const [f, setF] = useState(empty);
+  const [editId, setEditId] = useState(null);
+  const [msg, setMsg] = useState("");
+  const load = () => supabase.from("site_products").select("*").order("sort_order").then(({ data, error }) => { if (error) setMsg(`Load error: ${error.message}`); setItems(data || []); });
+  useEffect(() => { load(); }, []);
+  const done = (error) => { invalidate("products"); setMsg(error ? `Error: ${error.message}` : "Saved ✓ — live within a minute"); if (!error) { setF(empty); setEditId(null); } load(); };
+  const save = async () => {
+    if (!f.name) return setMsg("Name is required");
+    const row = { ...f, yield_per_kg: f.yield_per_kg === "" ? null : Number(f.yield_per_kg) };
+    const { error } = editId
+      ? await supabase.from("site_products").update({ ...row, updated_at: new Date().toISOString() }).eq("id", editId)
+      : await supabase.from("site_products").insert({ ...row, sort_order: (items.at(-1)?.sort_order || 0) + 10 });
+    done(error);
+  };
+  const edit = (p) => { setEditId(p.id); setF({ ...empty, ...p, yield_per_kg: p.yield_per_kg ?? "" }); setMsg("Editing — change fields and Save"); };
+  const remove = async (id) => { if (!confirm("Delete this product?")) return; done((await supabase.from("site_products").delete().eq("id", id)).error); };
+  const upload = async (e) => { const file = e.target.files?.[0]; if (!file) return; setMsg("Uploading…"); try { setF({ ...f, img: await uploadMedia(file) }); setMsg("Image ready — Save to apply"); } catch (err) { setMsg(`Error: ${err.message}`); } e.target.value = ""; };
+  return (
+    <div className="p-6" style={card}>
+      <p className="rs-body" style={{ fontSize: "0.85rem", color: COLORS.inkDim }}>The product range shown across the site (grid, marquee, yield guide). No prices — yield only, per client. Leave yield blank for whole spices.</p>
+      <div className="grid sm:grid-cols-2 gap-3 mt-5">
+        <input style={input} className="rs-body" value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} placeholder="Product name *" />
+        <select style={input} className="rs-body" value={f.category} onChange={(e) => setF({ ...f, category: e.target.value })}>{CATEGORIES.filter((c) => c !== "All").map((c) => <option key={c}>{c}</option>)}</select>
+        <select style={input} className="rs-body" value={f.cuisine} onChange={(e) => setF({ ...f, cuisine: e.target.value })}>{CUISINES.filter((c) => c !== "All").map((c) => <option key={c}>{c}</option>)}</select>
+        <input style={input} className="rs-body" value={f.packs} onChange={(e) => setF({ ...f, packs: e.target.value })} placeholder="Packs — e.g. 1kg · 5kg · 25kg" />
+        <input style={input} className="rs-body" type="number" value={f.yield_per_kg} onChange={(e) => setF({ ...f, yield_per_kg: e.target.value })} placeholder="Yield per kg (plates) — blank for whole spice" />
+        <input style={input} className="rs-body" value={f.shelf} onChange={(e) => setF({ ...f, shelf: e.target.value })} placeholder="Shelf life — e.g. 12 mo" />
+        <input style={input} className="rs-body sm:col-span-2" value={f.note} onChange={(e) => setF({ ...f, note: e.target.value })} placeholder="Short note — e.g. All-purpose gravy depth" />
+        <div className="flex items-center gap-3 sm:col-span-2">
+          <label className="rs-btn text-center cursor-pointer shrink-0" style={btn(COLORS.red)}>Upload pack photo<input type="file" accept="image/*" className="hidden" onChange={upload} /></label>
+          {f.img && <img src={f.img} alt="" style={{ height: 44, width: 44, objectFit: "contain", borderRadius: 8, border: `1px solid ${tint(COLORS.ink, 0.15)}` }} />}
+          <label className="rs-body flex items-center gap-2" style={{ fontSize: "0.8rem", color: COLORS.inkDim }}><input type="checkbox" checked={f.active} onChange={(e) => setF({ ...f, active: e.target.checked })} /> Show on site</label>
+        </div>
+      </div>
+      <div className="mt-4 flex items-center gap-4">
+        <button onClick={save} className="rs-btn" style={btn()}>{editId ? "Save changes" : "Add product"}</button>
+        {editId && <button onClick={() => { setF(empty); setEditId(null); setMsg(""); }} className="rs-btn" style={btn("transparent", COLORS.inkDim)}>Cancel</button>}
+        <span className="rs-body" style={{ fontSize: "0.8rem", color: COLORS.inkDim }}>{msg}</span>
+      </div>
+      <div className="grid sm:grid-cols-2 gap-3 mt-6">
+        {items.map((p) => (
+          <div key={p.id} className="flex items-center gap-3 p-3 rounded-xl" style={{ background: p.active ? "#fff" : tint(COLORS.ink, 0.05), border: `1px solid ${tint(COLORS.ink, 0.12)}` }}>
+            {p.img ? <img src={p.img} alt="" style={{ height: 40, width: 40, objectFit: "contain" }} /> : <div style={{ height: 40, width: 40, borderRadius: 8, background: tint(p.base, 0.3) }} />}
+            <div className="grow min-w-0">
+              <p className="rs-body truncate" style={{ fontWeight: 600, fontSize: "0.85rem", color: COLORS.ink }}>{p.name}{!p.active && <span style={{ color: COLORS.inkDim, fontWeight: 400 }}> · hidden</span>}</p>
+              <p className="rs-body truncate" style={{ fontSize: "0.72rem", color: COLORS.inkDim }}>{p.category} · {p.packs || "—"}</p>
+            </div>
+            <button onClick={() => edit(p)} className="rs-body shrink-0" style={{ color: COLORS.ink, fontSize: "0.74rem" }}>Edit</button>
+            <button onClick={() => remove(p.id)} className="rs-body shrink-0" style={{ color: COLORS.red, fontSize: "0.74rem" }}>Delete</button>
+          </div>
+        ))}
+        {items.length === 0 && <p className="rs-body col-span-full" style={{ color: COLORS.inkDim, fontSize: "0.85rem" }}>No products in the database yet — run the Phase B SQL, or the site shows the built-in range until you add products here.</p>}
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Recipes tab ---------- */
+function RecipesTab() {
+  const empty = { name: "", img: "", batch: "", uses: "", time: "", base: "#C4471D", deep: "#5C2210" };
+  const [items, setItems] = useState([]);
+  const [f, setF] = useState(empty);
+  const [editId, setEditId] = useState(null);
+  const [msg, setMsg] = useState("");
+  const load = () => supabase.from("site_recipes").select("*").order("sort_order").then(({ data, error }) => { if (error) setMsg(`Load error: ${error.message}`); setItems(data || []); });
+  useEffect(() => { load(); }, []);
+  const done = (error) => { invalidate("recipes"); setMsg(error ? `Error: ${error.message}` : "Saved ✓ — live within a minute"); if (!error) { setF(empty); setEditId(null); } load(); };
+  const save = async () => {
+    if (!f.name) return setMsg("Name is required");
+    const { error } = editId
+      ? await supabase.from("site_recipes").update({ ...f, updated_at: new Date().toISOString() }).eq("id", editId)
+      : await supabase.from("site_recipes").insert({ ...f, sort_order: (items.at(-1)?.sort_order || 0) + 10 });
+    done(error);
+  };
+  const edit = (r) => { setEditId(r.id); setF({ ...empty, ...r }); setMsg("Editing — change fields and Save"); };
+  const remove = async (id) => { if (!confirm("Delete this recipe?")) return; done((await supabase.from("site_recipes").delete().eq("id", id)).error); };
+  const upload = async (e) => { const file = e.target.files?.[0]; if (!file) return; setMsg("Uploading…"); try { setF({ ...f, img: await uploadMedia(file) }); setMsg("Image ready — Save to apply"); } catch (err) { setMsg(`Error: ${err.message}`); } e.target.value = ""; };
+  return (
+    <div className="p-6" style={card}>
+      <p className="rs-body" style={{ fontSize: "0.85rem", color: COLORS.inkDim }}>Restaurant-scale recipe cards (Recipes page + homepage). Upload premium plated-dish photos here.</p>
+      <div className="grid sm:grid-cols-2 gap-3 mt-5">
+        <input style={input} className="rs-body sm:col-span-2" value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} placeholder="Recipe name * — e.g. Hotel-style Sambhar Base" />
+        <input style={input} className="rs-body" value={f.batch} onChange={(e) => setF({ ...f, batch: e.target.value })} placeholder="Batch — e.g. 10L base · 80 plates" />
+        <input style={input} className="rs-body" value={f.time} onChange={(e) => setF({ ...f, time: e.target.value })} placeholder="Time — e.g. 45 min" />
+        <input style={input} className="rs-body sm:col-span-2" value={f.uses} onChange={(e) => setF({ ...f, uses: e.target.value })} placeholder="Uses — e.g. Sambhar Masala 320g" />
+        <div className="flex items-center gap-3 sm:col-span-2">
+          <label className="rs-btn text-center cursor-pointer shrink-0" style={btn(COLORS.red)}>Upload dish photo<input type="file" accept="image/*" className="hidden" onChange={upload} /></label>
+          {f.img && <img src={f.img} alt="" style={{ height: 44, width: 60, objectFit: "cover", borderRadius: 8 }} />}
+        </div>
+      </div>
+      <div className="mt-4 flex items-center gap-4">
+        <button onClick={save} className="rs-btn" style={btn()}>{editId ? "Save changes" : "Add recipe"}</button>
+        {editId && <button onClick={() => { setF(empty); setEditId(null); setMsg(""); }} className="rs-btn" style={btn("transparent", COLORS.inkDim)}>Cancel</button>}
+        <span className="rs-body" style={{ fontSize: "0.8rem", color: COLORS.inkDim }}>{msg}</span>
+      </div>
+      <div className="grid sm:grid-cols-2 gap-3 mt-6">
+        {items.map((r) => (
+          <div key={r.id} className="flex items-center gap-3 p-3 rounded-xl" style={{ background: "#fff", border: `1px solid ${tint(COLORS.ink, 0.12)}` }}>
+            {r.img ? <img src={r.img} alt="" style={{ height: 44, width: 60, objectFit: "cover", borderRadius: 8 }} /> : <div style={{ height: 44, width: 60, borderRadius: 8, background: tint(r.base, 0.3) }} />}
+            <div className="grow min-w-0">
+              <p className="rs-body truncate" style={{ fontWeight: 600, fontSize: "0.85rem", color: COLORS.ink }}>{r.name}</p>
+              <p className="rs-body truncate" style={{ fontSize: "0.72rem", color: COLORS.inkDim }}>{r.batch || "—"}</p>
+            </div>
+            <button onClick={() => edit(r)} className="rs-body shrink-0" style={{ color: COLORS.ink, fontSize: "0.74rem" }}>Edit</button>
+            <button onClick={() => remove(r.id)} className="rs-body shrink-0" style={{ color: COLORS.red, fontSize: "0.74rem" }}>Delete</button>
+          </div>
+        ))}
+        {items.length === 0 && <p className="rs-body col-span-full" style={{ color: COLORS.inkDim, fontSize: "0.85rem" }}>No recipes yet — run the Phase B SQL, or the site shows the built-in recipes.</p>}
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Hero slides tab ---------- */
+function HeroTab() {
+  const [slides, setSlides] = useState([]);
+  const [msg, setMsg] = useState("");
+  useEffect(() => {
+    supabase.from("site_settings").select("value").eq("key", "hero_slides").maybeSingle()
+      .then(({ data }) => { if (Array.isArray(data?.value)) setSlides(data.value); });
+  }, []);
+  const persist = async (next) => {
+    setSlides(next);
+    const { error } = await supabase.from("site_settings").upsert({ key: "hero_slides", value: next, updated_at: new Date().toISOString() });
+    invalidate("hero_slides");
+    setMsg(error ? `Error: ${error.message}` : "Saved ✓ — live within a minute");
+  };
+  const upload = async (e) => { const file = e.target.files?.[0]; if (!file) return; setMsg("Uploading…"); try { const url = await uploadMedia(file); persist([...slides, url]); } catch (err) { setMsg(`Error: ${err.message}`); } e.target.value = ""; };
+  const removeAt = (i) => persist(slides.filter((_, j) => j !== i));
+  const move = (i, dir) => { const j = i + dir; if (j < 0 || j >= slides.length) return; const next = [...slides]; [next[i], next[j]] = [next[j], next[i]]; persist(next); };
+  return (
+    <div className="p-6" style={card}>
+      <p className="rs-body" style={{ fontSize: "0.85rem", color: COLORS.inkDim }}>The rotating photos in the homepage hero. First image shows first. Landscape food shots work best.</p>
+      <div className="mt-5"><label className="rs-btn text-center cursor-pointer" style={btn(COLORS.red)}>Upload hero image<input type="file" accept="image/*" className="hidden" onChange={upload} /></label>
+        <span className="rs-body ml-4" style={{ fontSize: "0.8rem", color: COLORS.inkDim }}>{msg}</span></div>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+        {slides.map((src, i) => (
+          <div key={src + i} className="rounded-xl overflow-hidden relative" style={{ border: `1px solid ${tint(COLORS.ink, 0.15)}`, aspectRatio: "16/10" }}>
+            <img src={src} alt="" className="w-full h-full object-cover" />
+            <span className="absolute top-2 left-2 rs-eyebrow px-2 py-1 rounded" style={{ fontSize: "0.55rem", background: "rgba(42,22,12,0.7)", color: "#fff" }}>{i === 0 ? "First" : `#${i + 1}`}</span>
+            <div className="absolute bottom-0 inset-x-0 flex justify-between p-2" style={{ background: "linear-gradient(0deg, rgba(0,0,0,0.5), transparent)" }}>
+              <div className="flex gap-1">
+                <button onClick={() => move(i, -1)} className="rs-btn px-2 py-1 rounded" style={{ background: "rgba(255,255,255,0.85)", color: COLORS.ink, fontSize: "0.7rem" }}>↑</button>
+                <button onClick={() => move(i, 1)} className="rs-btn px-2 py-1 rounded" style={{ background: "rgba(255,255,255,0.85)", color: COLORS.ink, fontSize: "0.7rem" }}>↓</button>
+              </div>
+              <button onClick={() => removeAt(i)} className="rs-btn px-2 py-1 rounded" style={{ background: COLORS.red, color: "#fff", fontSize: "0.7rem" }}>Remove</button>
+            </div>
+          </div>
+        ))}
+        {slides.length === 0 && <p className="rs-body col-span-full" style={{ color: COLORS.inkDim, fontSize: "0.85rem" }}>No slides set — run the Phase B SQL, or the site shows the built-in hero images.</p>}
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Best-seller popup tab ---------- */
+function PopupTab() {
+  const empty = { enabled: true, title: "", sub: "", image: "", video: "", productHref: "/products", whatsappText: "" };
+  const [f, setF] = useState(empty);
+  const [msg, setMsg] = useState("");
+  useEffect(() => {
+    supabase.from("site_settings").select("value").eq("key", "bestseller_popup").maybeSingle()
+      .then(({ data }) => { if (data?.value && typeof data.value === "object") setF({ ...empty, ...data.value }); });
+  }, []);
+  const save = async () => {
+    const { error } = await supabase.from("site_settings").upsert({ key: "bestseller_popup", value: f, updated_at: new Date().toISOString() });
+    invalidate("bestseller_popup");
+    setMsg(error ? `Error: ${error.message}` : "Saved ✓ — live within a minute");
+  };
+  const upImg = async (e) => { const file = e.target.files?.[0]; if (!file) return; setMsg("Uploading…"); try { setF({ ...f, image: await uploadMedia(file) }); setMsg("Image ready — Save to apply"); } catch (err) { setMsg(`Error: ${err.message}`); } e.target.value = ""; };
+  const upVid = async (e) => { const file = e.target.files?.[0]; if (!file) return; setMsg("Uploading video…"); try { setF({ ...f, video: await uploadMedia(file) }); setMsg("Video ready — Save to apply"); } catch (err) { setMsg(`Error: ${err.message}`); } e.target.value = ""; };
+  return (
+    <div className="p-6" style={card}>
+      <p className="rs-body" style={{ fontSize: "0.85rem", color: COLORS.inkDim }}>The best-seller popup shown when the site opens. Add a square video (plays automatically) or a product photo.</p>
+      <label className="rs-body flex items-center gap-2 mt-4" style={{ fontSize: "0.88rem", color: COLORS.ink }}><input type="checkbox" checked={f.enabled} onChange={(e) => setF({ ...f, enabled: e.target.checked })} /> Show the popup</label>
+      <div className="grid sm:grid-cols-2 gap-3 mt-4">
+        <input style={input} className="rs-body sm:col-span-2" value={f.title} onChange={(e) => setF({ ...f, title: e.target.value })} placeholder="Product title — e.g. Kitchen King Masala" />
+        <input style={input} className="rs-body sm:col-span-2" value={f.sub} onChange={(e) => setF({ ...f, sub: e.target.value })} placeholder="One-line description" />
+        <input style={input} className="rs-body" value={f.productHref} onChange={(e) => setF({ ...f, productHref: e.target.value })} placeholder="'View product' link — e.g. /products" />
+        <input style={input} className="rs-body" value={f.whatsappText} onChange={(e) => setF({ ...f, whatsappText: e.target.value })} placeholder="WhatsApp message text" />
+      </div>
+      <div className="flex flex-wrap items-center gap-3 mt-4">
+        <label className="rs-btn text-center cursor-pointer" style={btn(COLORS.red)}>Upload photo<input type="file" accept="image/*" className="hidden" onChange={upImg} /></label>
+        {f.image && <img src={f.image} alt="" style={{ height: 44, width: 44, objectFit: "contain", borderRadius: 8 }} />}
+        <label className="rs-btn text-center cursor-pointer" style={btn(COLORS.mustard, COLORS.ink)}>Upload video (square)<input type="file" accept="video/*" className="hidden" onChange={upVid} /></label>
+        {f.video && <span className="rs-body" style={{ fontSize: "0.72rem", color: COLORS.inkDim }}>video set ✓</span>}
+      </div>
+      <div className="mt-5 flex items-center gap-4">
+        <button onClick={save} className="rs-btn" style={btn()}>Save popup</button>
+        <span className="rs-body" style={{ fontSize: "0.8rem", color: COLORS.inkDim }}>{msg}</span>
+      </div>
+    </div>
+  );
+}
+
+const TABS = [["counters", "Counters"], ["products", "Products"], ["recipes", "Recipes"], ["gallery", "Gallery"], ["hero", "Hero slides"], ["popup", "Best-seller"], ["testimonials", "Testimonials"]];
 
 export default function AdminPage() {
   const [authed, setAuthed] = useState(null);
@@ -224,7 +423,11 @@ export default function AdminPage() {
         </div>
         <div className="mt-5">
           {tab === "counters" && <CountersTab />}
+          {tab === "products" && <ProductsTab />}
+          {tab === "recipes" && <RecipesTab />}
           {tab === "gallery" && <GalleryTab />}
+          {tab === "hero" && <HeroTab />}
+          {tab === "popup" && <PopupTab />}
           {tab === "testimonials" && <TestimonialsTab />}
         </div>
       </div>

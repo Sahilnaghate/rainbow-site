@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { COLORS, tint, LINKS } from "../lib/theme.js";
 import { GrainDefs } from "./ui.jsx";
 import { FAQS } from "../lib/data.js";
+import { useBestSeller } from "../lib/cms.js";
 
 const ShellCtx = createContext(null);
 export const useShell = () => useContext(ShellCtx);
@@ -113,11 +114,14 @@ function AvailabilityModal({ onClose }) {
 }
 
 function BestSellerPopup({ onClose }) {
+  const bs = useBestSeller();
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const onMove = (e) => {
     const r = e.currentTarget.getBoundingClientRect();
     setTilt({ x: ((e.clientX - r.left) / r.width - 0.5) * 14, y: ((e.clientY - r.top) / r.height - 0.5) * -10 });
   };
+  const isVideo = bs.video && /\.(mp4|webm|mov)(\?|$)/i.test(bs.video);
+  if (bs.enabled === false) return null;
   return (
     <div className="fixed inset-0 z-[150] flex items-center justify-center px-4" style={{ background: "rgba(42,22,12,0.7)", backdropFilter: "blur(6px)" }} onClick={onClose}>
       <div onMouseMove={onMove} onClick={(e) => e.stopPropagation()} className="relative w-full max-w-md rounded-3xl overflow-hidden p-8 text-center"
@@ -127,15 +131,19 @@ function BestSellerPopup({ onClose }) {
         ))}
         <button onClick={onClose} aria-label="Close" className="absolute top-4 right-5 rs-body text-xl" style={{ color: "rgba(255,255,255,0.7)" }}>✕</button>
         <p className="rs-eyebrow" style={{ fontSize: "0.66rem", color: COLORS.mustard }}>★ Our best seller</p>
-        <div className="rs-float-chip mx-auto mt-4 rounded-2xl overflow-hidden" style={{ width: "78%", transform: `perspective(700px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`, transition: "transform 0.15s ease-out", filter: "drop-shadow(0 24px 40px rgba(0,0,0,0.5))", aspectRatio: "1 / 1", background: COLORS.ink }}>
-          <video src="/videos/kitchen-king-promo.mp4" poster="/images/products/kitchen-king.png" autoPlay muted loop playsInline
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+        <div className="rs-float-chip mx-auto mt-4 rounded-2xl overflow-hidden" style={{ width: isVideo ? "78%" : "58%", transform: `perspective(700px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`, transition: "transform 0.15s ease-out", filter: "drop-shadow(0 24px 40px rgba(0,0,0,0.5))", aspectRatio: isVideo ? "1 / 1" : "auto", background: isVideo ? COLORS.ink : "transparent" }}>
+          {isVideo ? (
+            <video src={bs.video} poster={bs.image} autoPlay muted loop playsInline
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+          ) : (
+            <img src={bs.image} alt={bs.title} style={{ width: "100%", height: "auto", display: "block" }} />
+          )}
         </div>
-        <h3 className="rs-display mt-5" style={{ fontSize: "1.7rem", color: "#fff", fontWeight: 600 }}>Kitchen King Masala</h3>
-        <p className="rs-body mt-2" style={{ color: "rgba(255,255,255,0.85)", fontSize: "0.92rem" }}>All-purpose royal depth for every gravy — the blend Indian kitchens reorder most.</p>
+        <h3 className="rs-display mt-5" style={{ fontSize: "1.7rem", color: "#fff", fontWeight: 600 }}>{bs.title}</h3>
+        <p className="rs-body mt-2" style={{ color: "rgba(255,255,255,0.85)", fontSize: "0.92rem" }}>{bs.sub}</p>
         <div className="mt-6 flex justify-center gap-3">
-          <Link href="/products" onClick={onClose} className="rs-btn px-6 py-3 rounded-full" style={{ background: "#fff", color: COLORS.red, fontSize: "0.75rem" }}>View product</Link>
-          <a href={`${LINKS.whatsapp}?text=${encodeURIComponent("Hi! I want to order Kitchen King Masala.")}`} target="_blank" rel="noreferrer" className="rs-btn px-6 py-3 rounded-full" style={{ background: "#1FA855", color: "#fff", fontSize: "0.75rem" }}>Order on WhatsApp</a>
+          <Link href={bs.productHref || "/products"} onClick={onClose} className="rs-btn px-6 py-3 rounded-full" style={{ background: "#fff", color: COLORS.red, fontSize: "0.75rem" }}>View product</Link>
+          <a href={`${LINKS.whatsapp}?text=${encodeURIComponent(bs.whatsappText || "Hi! I want to order.")}`} target="_blank" rel="noreferrer" className="rs-btn px-6 py-3 rounded-full" style={{ background: "#1FA855", color: "#fff", fontSize: "0.75rem" }}>Order on WhatsApp</a>
         </div>
       </div>
     </div>

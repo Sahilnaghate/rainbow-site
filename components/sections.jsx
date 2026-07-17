@@ -5,7 +5,7 @@ import { COLORS, tint, LINKS } from "../lib/theme.js";
 import { Reveal, TiltCard, SpiceMound, KenBurns, SteamLayer, SignatureDish } from "./ui.jsx";
 import { useShell, Eyebrow, H2, Field } from "./shell.jsx";
 import { CATEGORIES, CUISINES, PRODUCTS, RECIPES, TIMELINE, DISTRIBUTOR, HORECA_SOLUTIONS } from "../lib/data.js";
-import { useCounters, useTestimonials } from "../lib/cms.js";
+import { useCounters, useTestimonials, useProducts, useRecipes, useHeroSlides } from "../lib/cms.js";
 
 const inr = (n) => `₹${Number(n).toLocaleString("en-IN")}`;
 const HERO_SLIDES = ["/images/hero/garam-masal.jpg", "/images/hero/kitchenking-masala.jpg", "/images/hero/chat-masala.jpg"];
@@ -27,6 +27,7 @@ export function PageHero({ eyebrow, title, children }) {
 export function Hero() {
   const { openBulk } = useShell();
   const counters = useCounters();
+  const heroSlides = useHeroSlides();
   return (
     <section className="relative pt-32 md:pt-40 pb-14 px-6 md:px-10 max-w-7xl mx-auto">
       <div className="grid md:grid-cols-2 gap-10 items-center">
@@ -61,7 +62,7 @@ export function Hero() {
           </Reveal>
         </div>
         <div className="relative rounded-3xl overflow-hidden" style={{ height: "min(62vw, 480px)", background: COLORS.ink, boxShadow: "0 30px 70px rgba(142,27,29,0.28)" }}>
-          <KenBurns images={HERO_SLIDES} />
+          <KenBurns images={heroSlides} />
           <div className="absolute inset-0" style={{ background: `linear-gradient(160deg, ${tint(COLORS.ink, 0.35)} 0%, transparent 42%, ${tint(COLORS.redDeep, 0.5)} 78%, ${tint(COLORS.ink, 0.92)} 100%)` }} />
           <div className="absolute bottom-4 left-4 flex items-center gap-2.5 px-4 py-2.5 rounded-full" style={{ background: "rgba(42,22,12,0.55)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,246,231,0.28)" }}>
             <span className="h-2 w-2 rounded-full" style={{ background: COLORS.mustard }} />
@@ -74,10 +75,12 @@ export function Hero() {
 }
 
 export function Marquee() {
+  const products = useProducts();
+  const names = products.map((p) => p.name.toUpperCase());
   return (
     <div className="overflow-hidden py-5" style={{ background: COLORS.redDeep }}>
       <div className="rs-marquee-track">
-        {[...PRODUCTS.map((p) => p.name.toUpperCase()), ...PRODUCTS.map((p) => p.name.toUpperCase())].map((w, i) => (
+        {[...names, ...names].map((w, i) => (
           <span key={i} className="rs-display px-8" style={{ fontSize: "1.35rem", fontStyle: "italic", color: "#fff", letterSpacing: "0.02em", whiteSpace: "nowrap" }}>
             {w} <span style={{ color: "rgba(255,255,255,0.7)", fontStyle: "normal", marginLeft: "2rem" }}>✦</span>
           </span>
@@ -158,9 +161,10 @@ export function SignatureShowcase() {
 /* ---------- cost-per-plate widget ---------- */
 export function CostPerPlate() {
   // Client feedback: no ₹ pricing on the site (rates move seasonally) — yield-only guide.
-  const usable = PRODUCTS.filter((p) => p.yieldPerKg);
+  const products = useProducts();
+  const usable = products.filter((p) => p.yieldPerKg);
   const [idx, setIdx] = useState(0);
-  const p = usable[idx];
+  const p = usable[Math.min(idx, usable.length - 1)] || {};
   return (
     <TiltCard className="rounded-2xl overflow-hidden h-full">
       <div className="rounded-2xl p-6 md:p-7 h-full flex flex-col" style={{ background: `radial-gradient(ellipse at 30% 0%, ${COLORS.redDeep}, ${COLORS.ink} 80%)`, color: "#fff" }}>
@@ -169,7 +173,7 @@ export function CostPerPlate() {
         <div className="mt-5 grid gap-3">
           <label className="block">
             <span className="rs-eyebrow" style={{ fontSize: "0.58rem", color: "rgba(255,246,231,0.7)" }}>Blend</span>
-            <select value={idx} onChange={(e) => { const i = Number(e.target.value); setIdx(i); setPrice(usable[i].pricePerKg); }}
+            <select value={idx} onChange={(e) => setIdx(Number(e.target.value))}
               className="rs-body mt-1 w-full rounded-lg px-3 py-2.5" style={{ background: "rgba(255,246,231,0.12)", border: "1px solid rgba(255,246,231,0.3)", color: "#fff", fontSize: "0.92rem" }}>
               {usable.map((u, i) => <option key={u.name} value={i} style={{ color: COLORS.ink }}>{u.name}</option>)}
             </select>
@@ -194,14 +198,15 @@ export function CostPerPlate() {
 /* ---------- product grid (featured or full w/ filters) ---------- */
 export function ProductsSection({ featured = false }) {
   const { setZoom } = useShell();
+  const products = useProducts();
   const [category, setCategory] = useState("All");
   const [cuisine, setCuisine] = useState("All");
   const list = useMemo(() => {
-    let l = PRODUCTS;
+    let l = products;
     if (category !== "All") l = l.filter((p) => p.category === category);
     if (cuisine !== "All") l = l.filter((p) => p.cuisine === cuisine);
     return featured ? l.slice(0, 7) : l;
-  }, [category, cuisine, featured]);
+  }, [products, category, cuisine, featured]);
 
   return (
     <section id="products" className="px-6 md:px-10 py-24 md:py-28 max-w-7xl mx-auto">
@@ -447,14 +452,15 @@ export function ExportSection() {
 
 /* ---------- recipes (content play) ---------- */
 export function RecipesSection() {
+  const recipes = useRecipes();
   return (
     <section id="recipes" className="px-6 md:px-10 py-24 md:py-28" style={{ background: tint(COLORS.mustard, 0.1) }}>
       <div className="max-w-7xl mx-auto">
         <Reveal><Eyebrow center>Recipe engine</Eyebrow></Reveal>
         <Reveal delay={0.06}><H2 center>Restaurant-scale recipes, not home portions.</H2></Reveal>
         <div className="grid md:grid-cols-3 gap-8 mt-14">
-          {RECIPES.map((r, i) => (
-            <Reveal key={r.name} delay={i * 0.1}>
+          {recipes.map((r, i) => (
+            <Reveal key={r.id || r.name} delay={i * 0.1}>
               <TiltCard className="rounded-2xl overflow-hidden group">
                 <div className="relative rounded-2xl overflow-hidden" style={{ aspectRatio: "4/5", background: tint(r.base, 0.18) }}>
                   {r.img ? (
