@@ -127,8 +127,9 @@ function BestSellerPopup({ onClose }) {
         ))}
         <button onClick={onClose} aria-label="Close" className="absolute top-4 right-5 rs-body text-xl" style={{ color: "rgba(255,255,255,0.7)" }}>✕</button>
         <p className="rs-eyebrow" style={{ fontSize: "0.66rem", color: COLORS.mustard }}>★ Our best seller</p>
-        <div className="rs-float-chip mx-auto mt-4" style={{ width: "58%", transform: `perspective(700px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`, transition: "transform 0.15s ease-out", filter: "drop-shadow(0 24px 40px rgba(0,0,0,0.5))" }}>
-          <img src="/images/products/kitchen-king.png" alt="Kitchen King Masala" style={{ width: "100%", height: "auto" }} />
+        <div className="rs-float-chip mx-auto mt-4 rounded-2xl overflow-hidden" style={{ width: "78%", transform: `perspective(700px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`, transition: "transform 0.15s ease-out", filter: "drop-shadow(0 24px 40px rgba(0,0,0,0.5))", aspectRatio: "1 / 1", background: COLORS.ink }}>
+          <video src="/videos/kitchen-king-promo.mp4" poster="/images/products/kitchen-king.png" autoPlay muted loop playsInline
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
         </div>
         <h3 className="rs-display mt-5" style={{ fontSize: "1.7rem", color: "#fff", fontWeight: 600 }}>Kitchen King Masala</h3>
         <p className="rs-body mt-2" style={{ color: "rgba(255,255,255,0.85)", fontSize: "0.92rem" }}>All-purpose royal depth for every gravy — the blend Indian kitchens reorder most.</p>

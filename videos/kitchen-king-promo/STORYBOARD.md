@@ -19,7 +19,8 @@ music: warm upbeat premium, Indian percussion undertone
 - scene: Dark maroon canvas, amber spice particles drift up; big type "EVERY KITCHEN HAS A KING." punches in
 - duration: 1.378s
 - transition_in: cut
-- status: outline
+- status: animated
+- src: compositions/frames/01-hook.html
 - voiceover: "Every kitchen has a king."
 - asset_candidates: none
 - blueprint: compose
@@ -36,7 +37,8 @@ Scene 3 (2.6–4.0s): held read — type still, particles keep their slow drift;
 - scene: The Kitchen King pack floats in center with amber rim glow and soft shadow; name lockup slides under it
 - duration: 2.872s
 - transition_in: crossfade
-- status: outline
+- status: animated
+- src: compositions/frames/02-reveal.html
 - voiceover: "Meet Kitchen King Masala — Rainbow's best seller."
 - asset_candidates: capture/assets/kitchen-king-masala.png
 - blueprint: compose
@@ -53,7 +55,8 @@ Scene 3 (3.2–5.0s): on "best seller", a small red "BEST SELLER" chip stamps up
 - scene: Full-bleed food photograph (kitchen-king veg gravy) with slow Ken Burns; caption strip "One blend. Every gravy."
 - duration: 4.901s
 - transition_in: crossfade
-- status: outline
+- status: animated
+- src: compositions/frames/03-appetite.html
 - voiceover: "One blend that carries every gravy, every sabzi — rich, royal, and ready."
 - asset_candidates: capture/assets/kitchenking-masala.jpg
 - blueprint: compose
@@ -70,7 +73,8 @@ Scene 3 (3.6–5.0s): held read; Ken Burns eases to rest, strip stays.
 - scene: Type-led stat moment on cream: "THE SAME TASTE, EVERY BATCH." with a batch-code chip stamping in
 - duration: 4.358s
 - transition_in: cut
-- status: outline
+- status: animated
+- src: compositions/frames/04-proof.html
 - voiceover: "Batch-coded and blended to the gram — the same taste, every single batch."
 - asset_candidates: none
 - blueprint: compose
@@ -87,7 +91,8 @@ Scene 3 (3.4–5.0s): on "every single batch", "EVERY BATCH." punches beneath in
 - scene: Rainbow logo card with "Since 1956 · Darak Foods" and a thin timeline flourish
 - duration: 2.954s
 - transition_in: crossfade
-- status: outline
+- status: animated
+- src: compositions/frames/05-legacy.html
 - voiceover: "Blended by Darak Foods since nineteen fifty-six."
 - asset_candidates: capture/assets/logo.png
 - blueprint: compose
@@ -104,7 +109,8 @@ Scene 3 (3.0–4.0s): held read, completely still.
 - scene: Pack returns beside "REAL TASTE SINCE 1956"; site URL chip + "Order on WhatsApp" pill; particles settle
 - duration: 2.471s
 - transition_in: crossfade
-- status: outline
+- status: animated
+- src: compositions/frames/06-cta.html
 - voiceover: "Kitchen King Masala. Bring the king home."
 - asset_candidates: capture/assets/kitchen-king-masala.png, capture/assets/logo.png
 - blueprint: compose

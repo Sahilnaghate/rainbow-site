@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 05-legacy — Kitchen King promo, Frame 5 (Legacy). All render content lives inside <template>. -->
+  </head>
+  <body>
+    <template>
+      <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@600;800&display=swap");
+
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+
+        /* ── Layer 0: maroon ground ── */
+        .leg05-ground {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(120% 120% at 50% 42%, #4a160e 0%, #38120c 54%, #2a160c 100%);
+        }
+
+        /* ── Layer 1: white logo card (cutout on card) ── */
+        .leg05-card {
+          position: absolute;
+          left: 50%;
+          top: 420px;
+          width: 430px;
+          margin-left: -215px;
+          margin-top: -150px;
+          padding: 46px 40px;
+          background: #ffffff;
+          border-radius: 22px;
+          box-shadow: 0 34px 70px rgba(0, 0, 0, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          will-change: transform, opacity;
+        }
+        .leg05-logo {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+
+        /* ── Layer 2: SINCE 1956 eyebrow + amber lines ── */
+        .leg05-since {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 560px;
+          text-align: center;
+          font-family: "Inter", sans-serif;
+          font-weight: 800;
+          font-size: 44px;
+          color: #faa219;
+          letter-spacing: 0.3em;
+          opacity: 0;
+          will-change: transform, opacity, letter-spacing;
+        }
+        .leg05-linewrap {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 640px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 22px;
+        }
+        .leg05-line {
+          width: 150px;
+          height: 4px;
+          background: #faa219;
+          border-radius: 2px;
+          opacity: 0;
+          will-change: transform, opacity;
+        }
+        .leg05-line.left { transform-origin: 100% 50%; }
+        .leg05-line.right { transform-origin: 0% 50%; }
+        .leg05-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: #d22c2e;
+          opacity: 0;
+          will-change: opacity;
+        }
+      </style>
+
+      <div id="root" data-composition-id="05-legacy" data-start="0" data-duration="3.454" data-width="1080" data-height="1080">
+        <div id="05-legacy-ground" class="clip leg05-ground" data-start="0" data-duration="3.454" data-track-index="0"></div>
+        <div id="05-legacy-card" class="clip leg05-card" data-start="0" data-duration="3.454" data-track-index="1">
+          <img class="leg05-logo" src="assets/logo.png" alt="Rainbow Masala — Darak Foods" />
+        </div>
+        <div id="05-legacy-since" class="clip leg05-since" data-start="0" data-duration="3.454" data-track-index="2">SINCE 1956</div>
+        <div id="05-legacy-lines" class="clip leg05-linewrap" data-start="0" data-duration="3.454" data-track-index="3">
+          <div class="leg05-line left"></div>
+          <div class="leg05-dot"></div>
+          <div class="leg05-line right"></div>
+        </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+      <script>
+        window.__timelines = window.__timelines || {};
+        (function () {
+          var tl = gsap.timeline({ paused: true });
+
+          var card = document.getElementById("05-legacy-card");
+          var since = document.getElementById("05-legacy-since");
+          var lines = document.getElementById("05-legacy-lines");
+          var lineL = lines.querySelector(".leg05-line.left");
+          var lineR = lines.querySelector(".leg05-line.right");
+          var dot = lines.querySelector(".leg05-dot");
+
+          /* Scene 1: logo card fades up dead-center */
+          tl.fromTo(
+            card,
+            { opacity: 0, y: 40, scale: 0.94 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: "power3.out" },
+            0.1
+          );
+
+          /* Scene 2: SINCE 1956 reveals (letter-spacing held static per lint —
+             transform-only entrance so it stays smooth under frame capture) */
+          tl.fromTo(
+            since,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+            1.5
+          );
+          tl.fromTo(dot, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power1.out" }, 1.7);
+          tl.fromTo(
+            [lineL, lineR],
+            { scaleX: 0, opacity: 0 },
+            { scaleX: 1, opacity: 1, duration: 0.5, ease: "power3.out" },
+            1.8
+          );
+
+          window.__timelines["05-legacy"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

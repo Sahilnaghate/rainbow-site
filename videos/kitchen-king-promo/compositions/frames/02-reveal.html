@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 02-reveal — Kitchen King promo, Frame 2 (Product reveal). All render content lives inside <template>. -->
+  </head>
+  <body>
+    <template>
+      <style>
+        @import url("https://fonts.googleapis.com/css2?family=Shrikhand&family=Inter:wght@600;800&display=swap");
+
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+
+        /* ── Layer 0: dark ground continues from Frame 1 ── */
+        .rev02-ground {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(120% 120% at 50% 42%, #4a160e 0%, #38120c 54%, #2a160c 100%);
+        }
+
+        /* ── Layer 1: amber light-well behind the pack ── */
+        .rev02-well {
+          position: absolute;
+          left: 50%;
+          top: 470px;
+          width: 900px;
+          height: 900px;
+          margin-left: -450px;
+          margin-top: -450px;
+          background: radial-gradient(
+            50% 50% at 50% 50%,
+            rgba(250, 162, 25, 0.55) 0%,
+            rgba(210, 44, 46, 0.22) 44%,
+            rgba(42, 22, 12, 0) 72%
+          );
+          opacity: 0;
+          pointer-events: none;
+          will-change: transform, opacity;
+        }
+
+        /* ── Layer 2: particle field (dim ~40%) ── */
+        .rev02-particles {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          opacity: 0.4;
+        }
+        .rev02-p {
+          position: absolute;
+          border-radius: 50%;
+          background: #faa219;
+          will-change: transform;
+        }
+
+        /* ── Layer 3: the pack (cutout hero) ── */
+        .rev02-packwrap {
+          position: absolute;
+          left: 50%;
+          top: 500px;
+          width: 520px;
+          margin-left: -260px;
+          margin-top: -300px;
+          will-change: transform, opacity, filter;
+          filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.6));
+        }
+        .rev02-pack {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+
+        /* ── Layer 4: best-seller chip + name lockup ── */
+        .rev02-chip {
+          position: absolute;
+          left: 50%;
+          top: 250px;
+          margin-left: 120px;
+          padding: 12px 22px;
+          background: #d22c2e;
+          color: #fff3e2;
+          font-family: "Inter", sans-serif;
+          font-weight: 800;
+          font-size: 26px;
+          letter-spacing: 0.14em;
+          border-radius: 8px;
+          transform-origin: 50% 50%;
+          box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+          opacity: 0;
+          will-change: transform, opacity;
+        }
+        .rev02-lockup {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 760px;
+          text-align: center;
+          font-family: "Shrikhand", "Georgia", serif;
+          font-weight: 400;
+          font-size: 76px;
+          color: #fff3e2;
+          letter-spacing: 0.02em;
+          white-space: nowrap;
+          opacity: 0;
+          will-change: transform, opacity;
+        }
+        .rev02-lockup .kk-red {
+          color: #d22c2e;
+        }
+      </style>
+
+      <div id="root" data-composition-id="02-reveal" data-start="0" data-duration="3.372" data-width="1080" data-height="1080">
+        <div id="02-reveal-ground" class="clip rev02-ground" data-start="0" data-duration="3.372" data-track-index="0"></div>
+        <div id="02-reveal-well" class="clip rev02-well" data-start="0" data-duration="3.372" data-track-index="1"></div>
+        <div id="02-reveal-particles" class="clip rev02-particles" data-start="0" data-duration="3.372" data-track-index="2"></div>
+        <div id="02-reveal-packwrap" class="clip rev02-packwrap" data-start="0" data-duration="3.372" data-track-index="3">
+          <img class="rev02-pack" src="assets/kitchen-king-masala.png" alt="Kitchen King Masala pack" />
+        </div>
+        <div id="02-reveal-chip" class="clip rev02-chip" data-start="0" data-duration="3.372" data-track-index="4">BEST SELLER</div>
+        <div id="02-reveal-lockup" class="clip rev02-lockup" data-start="0" data-duration="3.372" data-track-index="5">
+          KITCHEN <span class="kk-red">KING</span> MASALA
+        </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+      <script>
+        window.__timelines = window.__timelines || {};
+        (function () {
+          var DUR = 2.872;
+          var tl = gsap.timeline({ paused: true });
+
+          /* deterministic particle field */
+          var seed = 20260718;
+          function rnd() {
+            seed = (seed * 1664525 + 1013904223) % 4294967296;
+            return seed / 4294967296;
+          }
+          var field = document.getElementById("02-reveal-particles");
+          var i, p, size, drift;
+          for (i = 0; i < 14; i++) {
+            p = document.createElement("div");
+            p.className = "rev02-p";
+            size = 3 + rnd() * 5;
+            p.style.width = size.toFixed(1) + "px";
+            p.style.height = size.toFixed(1) + "px";
+            p.style.left = (40 + rnd() * 1000).toFixed(1) + "px";
+            p.style.top = (160 + rnd() * 860).toFixed(1) + "px";
+            p.style.opacity = (0.16 + rnd() * 0.3).toFixed(2);
+            field.appendChild(p);
+            drift = 40 + rnd() * 70;
+            tl.fromTo(p, { y: 0 }, { y: -drift, duration: DUR, ease: "none" }, 0);
+          }
+
+          var well = document.getElementById("02-reveal-well");
+          var pack = document.getElementById("02-reveal-packwrap");
+          var chip = document.getElementById("02-reveal-chip");
+          var lock = document.getElementById("02-reveal-lockup");
+
+          /* Scene 1: light well brightens (anticipation) */
+          tl.fromTo(well, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, 0.0);
+
+          /* Scene 2: pack rises into dead-center with tilt settle */
+          tl.fromTo(
+            pack,
+            { y: 300, opacity: 0, rotation: 5, scale: 0.9 },
+            { y: 0, opacity: 1, rotation: 0, scale: 1, duration: 0.9, ease: "power3.out" },
+            0.85
+          );
+
+          /* Scene 3: chip stamps, lockup slides under */
+          tl.fromTo(
+            chip,
+            { opacity: 0, scale: 1.8, rotation: -8 },
+            { opacity: 1, scale: 1, rotation: -6, duration: 0.3, ease: "power4.out" },
+            1.95
+          );
+          tl.fromTo(
+            lock,
+            { opacity: 0, y: 40 },
+            { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+            2.15
+          );
+
+          window.__timelines["02-reveal"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

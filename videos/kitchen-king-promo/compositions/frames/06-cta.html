@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 06-cta — Kitchen King promo, Frame 6 (CTA / end-card). All render content lives inside <template>. -->
+  </head>
+  <body>
+    <template>
+      <style>
+        @import url("https://fonts.googleapis.com/css2?family=Shrikhand&family=Inter:wght@600;700;800&display=swap");
+
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+
+        /* ── Layer 0: maroon ground ── */
+        .cta06-ground {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(120% 120% at 38% 46%, #4a160e 0%, #38120c 55%, #2a160c 100%);
+        }
+
+        /* ── Layer 1: particle field (dim) ── */
+        .cta06-particles {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          opacity: 0.35;
+        }
+        .cta06-p {
+          position: absolute;
+          border-radius: 50%;
+          background: #faa219;
+          will-change: transform;
+        }
+
+        /* ── Layer 2: pack (cutout, left 40% column) ── */
+        .cta06-packwrap {
+          position: absolute;
+          left: 70px;
+          top: 300px;
+          width: 380px;
+          filter: drop-shadow(0 34px 54px rgba(0, 0, 0, 0.6));
+          opacity: 0;
+          will-change: transform, opacity;
+        }
+        .cta06-pack {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+
+        /* ── Layer 3: small logo upper-right ── */
+        .cta06-logo {
+          position: absolute;
+          right: 70px;
+          top: 130px;
+          width: 190px;
+          background: #fff;
+          border-radius: 12px;
+          padding: 12px 16px;
+          box-shadow: 0 12px 26px rgba(0, 0, 0, 0.4);
+          opacity: 0;
+          will-change: opacity, transform;
+        }
+        .cta06-logo img { display: block; width: 100%; height: auto; }
+
+        /* ── Layer 4: taglines (right column) ── */
+        .cta06-type {
+          position: absolute;
+          left: 480px;
+          right: 48px;
+          top: 340px;
+          text-align: left;
+          font-family: "Shrikhand", "Georgia", serif;
+        }
+        .cta06-l1 {
+          font-size: 66px;
+          line-height: 1.0;
+          color: #fff3e2;
+          white-space: nowrap;
+          opacity: 0;
+          will-change: transform, opacity;
+        }
+        .cta06-l2 {
+          font-size: 66px;
+          line-height: 1.0;
+          margin-top: 8px;
+          color: #faa219;
+          white-space: nowrap;
+          opacity: 0;
+          will-change: transform, opacity;
+        }
+
+        /* ── Layer 5: CTA pills (still above y=900 band) ── */
+        .cta06-pills {
+          position: absolute;
+          left: 480px;
+          right: 48px;
+          top: 600px;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          align-items: flex-start;
+          font-family: "Inter", sans-serif;
+        }
+        .cta06-url {
+          padding: 16px 26px;
+          background: #d22c2e;
+          color: #fff3e2;
+          font-weight: 700;
+          font-size: 30px;
+          letter-spacing: 0.02em;
+          border-radius: 999px;
+          opacity: 0;
+          will-change: transform, opacity;
+        }
+        .cta06-wa {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 16px 30px;
+          background: #1fa855;
+          color: #ffffff;
+          font-weight: 800;
+          font-size: 30px;
+          border-radius: 999px;
+          box-shadow: 0 12px 30px rgba(31, 168, 85, 0.35);
+          opacity: 0;
+          will-change: transform, opacity;
+        }
+        .cta06-wa .wa-dot {
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          background: #ffffff;
+        }
+      </style>
+
+      <div id="root" data-composition-id="06-cta" data-start="0" data-duration="2.471" data-width="1080" data-height="1080">
+        <div id="06-cta-ground" class="clip cta06-ground" data-start="0" data-duration="2.471" data-track-index="0"></div>
+        <div id="06-cta-particles" class="clip cta06-particles" data-start="0" data-duration="2.471" data-track-index="1"></div>
+        <div id="06-cta-packwrap" class="clip cta06-packwrap" data-start="0" data-duration="2.471" data-track-index="2">
+          <img class="cta06-pack" src="assets/kitchen-king-masala.png" alt="Kitchen King Masala pack" />
+        </div>
+        <div id="06-cta-logo" class="clip cta06-logo" data-start="0" data-duration="2.471" data-track-index="3">
+          <img src="assets/logo.png" alt="Rainbow Masala" />
+        </div>
+        <div id="06-cta-type" class="clip cta06-type" data-start="0" data-duration="2.471" data-track-index="4">
+          <div id="06-cta-l1" class="cta06-l1">REAL TASTE</div>
+          <div id="06-cta-l2" class="cta06-l2">SINCE 1956.</div>
+        </div>
+        <div id="06-cta-pills" class="clip cta06-pills" data-start="0" data-duration="2.471" data-track-index="5">
+          <div id="06-cta-url" class="cta06-url">rainbow-site-three.vercel.app</div>
+          <div id="06-cta-wa" class="cta06-wa"><span class="wa-dot"></span>Order on WhatsApp</div>
+        </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+      <script>
+        window.__timelines = window.__timelines || {};
+        (function () {
+          var DUR = 2.471;
+          var tl = gsap.timeline({ paused: true });
+
+          /* deterministic particle field */
+          var seed = 20260722;
+          function rnd() {
+            seed = (seed * 1664525 + 1013904223) % 4294967296;
+            return seed / 4294967296;
+          }
+          var field = document.getElementById("06-cta-particles");
+          var i, p, size, drift;
+          for (i = 0; i < 12; i++) {
+            p = document.createElement("div");
+            p.className = "cta06-p";
+            size = 3 + rnd() * 5;
+            p.style.width = size.toFixed(1) + "px";
+            p.style.height = size.toFixed(1) + "px";
+            p.style.left = (40 + rnd() * 1000).toFixed(1) + "px";
+            p.style.top = (160 + rnd() * 820).toFixed(1) + "px";
+            p.style.opacity = (0.16 + rnd() * 0.3).toFixed(2);
+            field.appendChild(p);
+            drift = 34 + rnd() * 60;
+            tl.fromTo(p, { y: 0 }, { y: -drift, duration: DUR, ease: "none" }, 0);
+          }
+
+          var pack = document.getElementById("06-cta-packwrap");
+          var logo = document.getElementById("06-cta-logo");
+          var l1 = document.getElementById("06-cta-l1");
+          var l2 = document.getElementById("06-cta-l2");
+          var url = document.getElementById("06-cta-url");
+          var wa = document.getElementById("06-cta-wa");
+
+          /* Scene 1: pack slides in from left */
+          tl.fromTo(
+            pack,
+            { opacity: 0, x: -200, rotation: -4 },
+            { opacity: 1, x: 0, rotation: 0, duration: 0.6, ease: "power3.out" },
+            0.1
+          );
+
+          /* Scene 2: taglines stack in + logo fades */
+          tl.fromTo(l1, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.9);
+          tl.fromTo(l2, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 1.1);
+          tl.fromTo(logo, { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 1.0);
+
+          /* Scene 3: URL + WhatsApp pills rise; then hold still */
+          tl.fromTo(url, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.36, ease: "power3.out" }, 1.5);
+          tl.fromTo(wa, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.36, ease: "power3.out" }, 1.7);
+
+          window.__timelines["06-cta"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

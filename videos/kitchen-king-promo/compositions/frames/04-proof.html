@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 04-proof — Kitchen King promo, Frame 4 (Proof). All render content lives inside <template>. -->
+  </head>
+  <body>
+    <template>
+      <style>
+        @import url("https://fonts.googleapis.com/css2?family=Shrikhand&family=Inter:wght@700;800&display=swap");
+
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+
+        /* ── Layer 0: cream canvas ── */
+        .prf04-ground {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(120% 120% at 50% 40%, #fffaf0 0%, #fff3e2 62%, #f7e7cf 100%);
+        }
+
+        /* ── Layer 1: batch-code chip (maroon), upper-left third ── */
+        .prf04-chip {
+          position: absolute;
+          left: 120px;
+          top: 250px;
+          padding: 16px 26px;
+          background: #38120c;
+          color: #fff3e2;
+          font-family: "Inter", sans-serif;
+          font-weight: 700;
+          font-size: 30px;
+          letter-spacing: 0.1em;
+          border-radius: 10px;
+          box-shadow: 0 14px 30px rgba(56, 18, 12, 0.28);
+          transform-origin: 20% 50%;
+          opacity: 0;
+          will-change: transform, opacity;
+        }
+
+        /* ── Layer 2: amber tick lines beside chip ── */
+        .prf04-ticks {
+          position: absolute;
+          left: 130px;
+          top: 340px;
+        }
+        .prf04-tick {
+          height: 6px;
+          margin-top: 12px;
+          background: #faa219;
+          border-radius: 3px;
+          transform-origin: 0% 50%;
+          opacity: 0;
+          will-change: transform, opacity;
+        }
+        .prf04-tick.t1 { width: 180px; }
+        .prf04-tick.t2 { width: 130px; }
+        .prf04-tick.t3 { width: 210px; }
+
+        /* ── Layer 3: type block (centered lower-middle, keeps above y=900) ── */
+        .prf04-type {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 500px;
+          text-align: center;
+          font-family: "Shrikhand", "Georgia", serif;
+          font-weight: 400;
+        }
+        .prf04-l1 {
+          font-size: 96px;
+          line-height: 1;
+          color: #2a160c;
+          letter-spacing: 0.01em;
+          opacity: 0;
+          will-change: transform, opacity;
+        }
+        .prf04-l2 {
+          font-size: 150px;
+          line-height: 0.95;
+          margin-top: 16px;
+          color: #d22c2e;
+          opacity: 0;
+          will-change: transform, opacity, filter;
+        }
+      </style>
+
+      <div id="root" data-composition-id="04-proof" data-start="0" data-duration="4.858" data-width="1080" data-height="1080">
+        <div id="04-proof-ground" class="clip prf04-ground" data-start="0" data-duration="4.858" data-track-index="0"></div>
+        <div id="04-proof-chip" class="clip prf04-chip" data-start="0" data-duration="4.858" data-track-index="1">BATCH KK-2607-114</div>
+        <div id="04-proof-ticks" class="clip prf04-ticks" data-start="0" data-duration="4.858" data-track-index="2">
+          <div class="prf04-tick t1"></div>
+          <div class="prf04-tick t2"></div>
+          <div class="prf04-tick t3"></div>
+        </div>
+        <div id="04-proof-type" class="clip prf04-type" data-start="0" data-duration="4.858" data-track-index="3">
+          <div id="04-proof-l1" class="prf04-l1">THE SAME TASTE,</div>
+          <div id="04-proof-l2" class="prf04-l2">EVERY BATCH.</div>
+        </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+      <script>
+        window.__timelines = window.__timelines || {};
+        (function () {
+          var tl = gsap.timeline({ paused: true });
+
+          var chip = document.getElementById("04-proof-chip");
+          var ticks = document.getElementById("04-proof-ticks").querySelectorAll(".prf04-tick");
+          var l1 = document.getElementById("04-proof-l1");
+          var l2 = document.getElementById("04-proof-l2");
+
+          /* Scene 1: chip stamps in on "Batch-coded" */
+          tl.fromTo(
+            chip,
+            { opacity: 0, scale: 1.7, rotation: -6 },
+            { opacity: 1, scale: 1, rotation: -2, duration: 0.32, ease: "power4.out" },
+            0.2
+          );
+          /* settle shadow shudder */
+          tl.to(chip, { rotation: 0, duration: 0.22, ease: "power2.out" }, 0.52);
+
+          /* Scene 2: ticks draw on "blended to the gram" */
+          tl.fromTo(
+            ticks,
+            { scaleX: 0, opacity: 0 },
+            { scaleX: 1, opacity: 1, duration: 0.3, ease: "power3.out", stagger: 0.12 },
+            1.3
+          );
+
+          /* "THE SAME TASTE," lands centered */
+          tl.fromTo(
+            l1,
+            { opacity: 0, y: 40 },
+            { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" },
+            2.2
+          );
+
+          /* Scene 3: "EVERY BATCH." punches beneath in red */
+          tl.fromTo(
+            l2,
+            { opacity: 0, scale: 1.7, y: 30, filter: "blur(14px)" },
+            { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", duration: 0.42, ease: "power4.out" },
+            3.0
+          );
+
+          window.__timelines["04-proof"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
