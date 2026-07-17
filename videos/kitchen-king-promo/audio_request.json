@@ -1,0 +1,37 @@
+{
+  "provider": "kokoro",
+  "speed": 1,
+  "lines": [
+    {
+      "id": "01",
+      "text": "Every kitchen has a king."
+    },
+    {
+      "id": "02",
+      "text": "Meet Kitchen King Masala — Rainbow's best seller."
+    },
+    {
+      "id": "03",
+      "text": "One blend that carries every gravy, every sabzi — rich, royal, and ready."
+    },
+    {
+      "id": "04",
+      "text": "Batch-coded and blended to the gram — the same taste, every single batch."
+    },
+    {
+      "id": "05",
+      "text": "Blended by Darak Foods since nineteen fifty-six."
+    },
+    {
+      "id": "06",
+      "text": "Kitchen King Masala. Bring the king home."
+    }
+  ],
+  "bgm": {
+    "mode": "retrieve",
+    "query": "warm upbeat premium, Indian percussion undertone",
+    "blob": "Kitchen King Masala — the best-seller that tastes the same in every batch",
+    "arc": "Hook → Reveal → Appetite → Proof → Legacy → CTA"
+  },
+  "voice": "af_heart"
+}

@@ -1,0 +1,332 @@
+{
+  "typography": [
+    {
+      "role": "display",
+      "fontFamily": "Fraunces",
+      "fontSize": "65.6px",
+      "fontWeight": "600",
+      "lineHeight": "67.568px",
+      "letterSpacing": "-0.656px",
+      "color": "#2A160C",
+      "sampleText": "The same taste,every batch. Every branch."
+    },
+    {
+      "role": "heading",
+      "fontFamily": "Fraunces",
+      "fontSize": "51.2px",
+      "fontWeight": "600",
+      "lineHeight": "76.8px",
+      "letterSpacing": "-0.512px",
+      "color": "#FFFFFF",
+      "sampleText": "Talk to a masala partner."
+    },
+    {
+      "role": "heading-2",
+      "fontFamily": "Fraunces",
+      "fontSize": "46.4px",
+      "fontWeight": "600",
+      "lineHeight": "69.6px",
+      "letterSpacing": "-0.464px",
+      "color": "#FFFFFF",
+      "sampleText": "Own a territory thatreorders itself."
+    },
+    {
+      "role": "heading-2",
+      "fontFamily": "Fraunces",
+      "fontSize": "44.8px",
+      "fontWeight": "600",
+      "lineHeight": "67.2px",
+      "letterSpacing": "-0.448px",
+      "color": "#2A160C",
+      "sampleText": "Built for the pass, priced for the plate."
+    },
+    {
+      "role": "body",
+      "fontFamily": "Fraunces",
+      "fontSize": "35.2px",
+      "fontWeight": "600",
+      "lineHeight": "52.8px",
+      "letterSpacing": "-0.352px",
+      "color": "#FAA219",
+      "sampleText": "₹3.88 / plate"
+    },
+    {
+      "role": "heading-3",
+      "fontFamily": "Fraunces",
+      "fontSize": "23.2px",
+      "fontWeight": "600",
+      "lineHeight": "34.8px",
+      "letterSpacing": "-0.232px",
+      "color": "#FFFFFF",
+      "sampleText": "What a plate really costs you."
+    },
+    {
+      "role": "heading-3",
+      "fontFamily": "Fraunces",
+      "fontSize": "16.8px",
+      "fontWeight": "600",
+      "lineHeight": "25.2px",
+      "letterSpacing": "-0.168px",
+      "color": "#2A160C",
+      "sampleText": "Garam Masala"
+    },
+    {
+      "role": "label",
+      "fontFamily": "-apple-system",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "color": "#FFFFFF",
+      "sampleText": "BlendGaram MasalaKitchen King MasalaChhole MasalaPaneer Masa"
+    },
+    {
+      "role": "link",
+      "fontFamily": "Work Sans",
+      "fontSize": "14.72px",
+      "fontWeight": "400",
+      "lineHeight": "22.08px",
+      "letterSpacing": "normal",
+      "color": "#6B5040",
+      "sampleText": "Story"
+    }
+  ],
+  "spacing": {
+    "observed": [
+      4,
+      5,
+      6,
+      8,
+      10,
+      11,
+      12,
+      13,
+      14,
+      16,
+      17,
+      20,
+      24,
+      28,
+      32
+    ],
+    "baseUnit": 8
+  },
+  "radius": [
+    "8px",
+    "16px",
+    "3.35544e+07px"
+  ],
+  "shadows": [],
+  "buttons": [
+    {
+      "label": "Partner Login",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#6B5040",
+      "padding": "8px 16px",
+      "borderRadius": "3.35544e+07px",
+      "border": "2px solid rgba(42, 22, 12, 0.25)",
+      "boxShadow": "none",
+      "fontSize": "11.52px",
+      "fontWeight": "600",
+      "height": "37.2656px"
+    },
+    {
+      "label": "Bulk Enquiry",
+      "background": "#D22C2E",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#FFFFFF",
+      "padding": "8px 20px",
+      "borderRadius": "3.35544e+07px",
+      "border": "0px solid rgb(255, 255, 255)",
+      "boxShadow": "none",
+      "fontSize": "12px",
+      "fontWeight": "600",
+      "height": "34px"
+    },
+    {
+      "label": "Download Catalogue",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#2A160C",
+      "padding": "14px 28px",
+      "borderRadius": "3.35544e+07px",
+      "border": "2px solid rgb(250, 162, 25)",
+      "boxShadow": "none",
+      "fontSize": "13.12px",
+      "fontWeight": "600",
+      "height": "51.6875px"
+    },
+    {
+      "label": "View the full range →",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#D22C2E",
+      "padding": "14px 28px",
+      "borderRadius": "3.35544e+07px",
+      "border": "2px solid rgb(210, 44, 46)",
+      "boxShadow": "none",
+      "fontSize": "12.8px",
+      "fontWeight": "600",
+      "height": "51.1875px"
+    },
+    {
+      "label": "Apply on WhatsApp",
+      "background": "#FAA219",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#2A160C",
+      "padding": "12px 24px",
+      "borderRadius": "3.35544e+07px",
+      "border": "0px solid rgb(42, 22, 12)",
+      "boxShadow": "none",
+      "fontSize": "12.48px",
+      "fontWeight": "600",
+      "height": "46.7188px"
+    },
+    {
+      "label": "Email us",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#FFFFFF",
+      "padding": "12px 24px",
+      "borderRadius": "3.35544e+07px",
+      "border": "2px solid rgba(255, 246, 231, 0.5)",
+      "boxShadow": "none",
+      "fontSize": "12.48px",
+      "fontWeight": "600",
+      "height": "46.7188px"
+    }
+  ],
+  "cards": [
+    {
+      "label": "card",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#2A160C",
+      "padding": "0px",
+      "borderRadius": "16px",
+      "border": "0px solid rgb(42, 22, 12)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "360.703px"
+    }
+  ],
+  "nav": {
+    "label": "navigation",
+    "background": "transparent",
+    "backgroundImage": "",
+    "backdropFilter": "",
+    "color": "#2A160C",
+    "padding": "0px",
+    "borderRadius": "0px",
+    "border": "",
+    "boxShadow": "none",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "height": "85px"
+  },
+  "chips": [
+    {
+      "label": "Partner Login",
+      "background": "transparent",
+      "color": "#6B5040",
+      "padding": "8px 16px",
+      "borderRadius": "3.35544e+07px",
+      "border": "2px solid rgba(42, 22, 12, 0.25)",
+      "boxShadow": "none",
+      "fontSize": "11.52px",
+      "fontWeight": "600",
+      "height": "37.2656px"
+    },
+    {
+      "label": "Premium Blends",
+      "background": "#5C3A1E",
+      "color": "#FFFFFF",
+      "padding": "4px 10px",
+      "borderRadius": "3.35544e+07px",
+      "border": "0px solid rgb(255, 255, 255)",
+      "boxShadow": "none",
+      "fontSize": "8.32px",
+      "fontWeight": "600",
+      "height": "20.4688px"
+    },
+    {
+      "label": "Premium Blends",
+      "background": "#8A5F0E",
+      "color": "#FFFFFF",
+      "padding": "4px 10px",
+      "borderRadius": "3.35544e+07px",
+      "border": "0px solid rgb(255, 255, 255)",
+      "boxShadow": "none",
+      "fontSize": "8.32px",
+      "fontWeight": "600",
+      "height": "20.4688px"
+    },
+    {
+      "label": "Premium Blends",
+      "background": "#6B0F0F",
+      "color": "#FFFFFF",
+      "padding": "4px 10px",
+      "borderRadius": "3.35544e+07px",
+      "border": "0px solid rgb(255, 255, 255)",
+      "boxShadow": "none",
+      "fontSize": "8.32px",
+      "fontWeight": "600",
+      "height": "20.4688px"
+    }
+  ],
+  "statCells": [],
+  "tabs": [],
+  "backgrounds": [
+    {
+      "value": "radial-gradient(at 50% 20%, rgb(142, 27, 29), rgb(42, 22, 12) 80%)",
+      "area": 1306170
+    },
+    {
+      "value": "radial-gradient(at 40% 30%, rgb(186, 44, 40), rgb(42, 22, 12) 90%)",
+      "area": 408980
+    },
+    {
+      "value": "linear-gradient(160deg, rgba(42, 22, 12, 0.35) 0%, rgba(0, 0, 0, 0) 42%, rgba(142, 27, 29, 0.5) 78%, rgba(42, 22, 12, 0.92) 100%)",
+      "area": 278400
+    },
+    {
+      "value": "radial-gradient(at 30% 0%, rgb(142, 27, 29), rgb(42, 22, 12) 80%)",
+      "area": 210205
+    },
+    {
+      "value": "radial-gradient(at 50% 40%, rgb(242, 169, 0), rgb(42, 22, 12) 90%)",
+      "area": 80933
+    },
+    {
+      "value": "radial-gradient(at 50% 40%, rgb(196, 30, 30), rgb(42, 22, 12) 90%)",
+      "area": 80933
+    }
+  ],
+  "glass": [
+    {
+      "backdropFilter": "blur(6px)",
+      "background": "rgba(255, 246, 231, 0.06)",
+      "border": "1px solid rgba(255, 246, 231, 0.22)",
+      "borderRadius": "16px",
+      "boxShadow": "",
+      "area": 202096
+    },
+    {
+      "backdropFilter": "blur(8px)",
+      "background": "rgba(42, 22, 12, 0.55)",
+      "border": "1px solid rgba(255, 246, 231, 0.28)",
+      "borderRadius": "3.35544e+07px",
+      "boxShadow": "",
+      "area": 15252
+    }
+  ]
+}

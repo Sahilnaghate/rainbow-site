@@ -5,6 +5,11 @@ import { COLORS, tint, LINKS } from "../lib/theme.js";
 import { PRODUCTS } from "../lib/data.js";
 import { useGallery } from "../lib/cms.js";
 
+const SOCIALS = [
+  { label: "Meta (Facebook)", href: "https://www.facebook.com/rainbowmasala", accent: "#1877F2" },
+  { label: "LinkedIn", href: "https://in.linkedin.com/company/rainbow-masala", accent: "#0A66C2" },
+  { label: "Instagram", href: LINKS.instagram, accent: "#C13584" },
+];
 const CHANNELS = [
   { label: "WhatsApp", value: "+91 83559 33962", href: LINKS.whatsapp, note: "Fastest — replies within business hours", accent: "#1FA855" },
   { label: "Phone", value: "+91 84828 59999", href: `tel:${LINKS.phone}`, note: "Mon–Sat, 10am–7pm IST", accent: "#D22C2E" },
@@ -29,6 +34,14 @@ export function ContactBlock() {
           </Reveal>
         ))}
       </div>
+
+      <Reveal delay={0.12}>
+        <div className="flex flex-wrap gap-3 mt-6">
+          {SOCIALS.map((s) => (
+            <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="rs-btn px-5 py-2.5 rounded-full" style={{ border: `2px solid ${s.accent}`, color: s.accent, fontSize: "0.7rem" }}>{s.label}</a>
+          ))}
+        </div>
+      </Reveal>
 
       <Reveal delay={0.15}>
         <div className="rounded-2xl p-7 mt-8 flex flex-wrap items-center justify-between gap-5" style={{ background: tint(COLORS.mustard, 0.12), border: `1px solid ${tint(COLORS.mustard, 0.4)}` }}>

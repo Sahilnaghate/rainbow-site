@@ -75,11 +75,11 @@ export function Hero() {
 
 export function Marquee() {
   return (
-    <div className="overflow-hidden py-5" style={{ background: COLORS.red }}>
+    <div className="overflow-hidden py-5" style={{ background: COLORS.redDeep }}>
       <div className="rs-marquee-track">
         {[...PRODUCTS.map((p) => p.name.toUpperCase()), ...PRODUCTS.map((p) => p.name.toUpperCase())].map((w, i) => (
-          <span key={i} className="rs-display px-8" style={{ fontSize: "1.3rem", fontStyle: "italic", color: i % 2 ? COLORS.mustard : "#fff", whiteSpace: "nowrap" }}>
-            {w} <span style={{ color: COLORS.mustard, fontStyle: "normal", marginLeft: "2rem" }}>✦</span>
+          <span key={i} className="rs-display px-8" style={{ fontSize: "1.35rem", fontStyle: "italic", color: "#fff", letterSpacing: "0.02em", whiteSpace: "nowrap" }}>
+            {w} <span style={{ color: "rgba(255,255,255,0.7)", fontStyle: "normal", marginLeft: "2rem" }}>✦</span>
           </span>
         ))}
       </div>
@@ -89,16 +89,15 @@ export function Marquee() {
 
 /* ---------- cost-per-plate widget ---------- */
 export function CostPerPlate() {
-  const usable = PRODUCTS.filter((p) => p.yieldPerKg && p.pricePerKg);
+  // Client feedback: no ₹ pricing on the site (rates move seasonally) — yield-only guide.
+  const usable = PRODUCTS.filter((p) => p.yieldPerKg);
   const [idx, setIdx] = useState(0);
-  const [price, setPrice] = useState(usable[0].pricePerKg);
   const p = usable[idx];
-  const perPlate = price / p.yieldPerKg;
   return (
     <TiltCard className="rounded-2xl overflow-hidden h-full">
       <div className="rounded-2xl p-6 md:p-7 h-full flex flex-col" style={{ background: `radial-gradient(ellipse at 30% 0%, ${COLORS.redDeep}, ${COLORS.ink} 80%)`, color: "#fff" }}>
-        <p className="rs-eyebrow" style={{ fontSize: "0.68rem", color: COLORS.mustard }}>Cost-per-plate math</p>
-        <h3 className="rs-display mt-2" style={{ fontSize: "1.45rem", fontWeight: 600 }}>What a plate really costs you.</h3>
+        <p className="rs-eyebrow" style={{ fontSize: "0.68rem", color: COLORS.mustard }}>Yield guide</p>
+        <h3 className="rs-display mt-2" style={{ fontSize: "1.45rem", fontWeight: 600 }}>How far one kilo goes.</h3>
         <div className="mt-5 grid gap-3">
           <label className="block">
             <span className="rs-eyebrow" style={{ fontSize: "0.58rem", color: "rgba(255,246,231,0.7)" }}>Blend</span>
@@ -107,21 +106,17 @@ export function CostPerPlate() {
               {usable.map((u, i) => <option key={u.name} value={i} style={{ color: COLORS.ink }}>{u.name}</option>)}
             </select>
           </label>
-          <label className="block">
-            <span className="rs-eyebrow" style={{ fontSize: "0.58rem", color: "rgba(255,246,231,0.7)" }}>Your price per kg (₹)</span>
-            <input type="number" value={price} onChange={(e) => setPrice(Number(e.target.value) || 0)}
-              className="rs-body mt-1 w-full rounded-lg px-3 py-2.5" style={{ background: "rgba(255,246,231,0.12)", border: "1px solid rgba(255,246,231,0.3)", color: "#fff", fontSize: "0.92rem" }} />
-          </label>
+
         </div>
         <div className="mt-6 flex items-end justify-between gap-4 pt-5" style={{ borderTop: "1px solid rgba(255,246,231,0.25)" }}>
           <div>
-            <p className="rs-eyebrow" style={{ fontSize: "0.58rem", color: "rgba(255,246,231,0.7)" }}>1 kg ≈ {p.yieldPerKg} plates</p>
+            <p className="rs-eyebrow" style={{ fontSize: "0.58rem", color: "rgba(255,246,231,0.7)" }}>Indicative yield</p>
             <p className="rs-display mt-1" style={{ fontSize: "2.2rem", color: COLORS.mustard, fontWeight: 600 }}>
-              {perPlate < 1 ? `${Math.round(perPlate * 100)}p` : inr(perPlate.toFixed(2))}
-              <span className="rs-body" style={{ fontSize: "0.9rem", color: "rgba(255,246,231,0.8)" }}> / plate</span>
+              1kg ≈ {p.yieldPerKg}
+              <span className="rs-body" style={{ fontSize: "0.9rem", color: "rgba(255,246,231,0.8)" }}> plates</span>
             </p>
           </div>
-          <p className="rs-body text-right" style={{ fontSize: "0.72rem", color: "rgba(255,246,231,0.65)", maxWidth: "130px" }}>Indicative yields — validated per recipe with your chef.</p>
+          <p className="rs-body text-right" style={{ fontSize: "0.72rem", color: "rgba(255,246,231,0.65)", maxWidth: "130px" }}>Validated per recipe with your chef. Trade rates on enquiry.</p>
         </div>
       </div>
     </TiltCard>

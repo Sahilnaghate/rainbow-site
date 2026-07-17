@@ -1,0 +1,94 @@
+{
+  "summary": {
+    "webAnimations": 2,
+    "cssDeclarations": 57,
+    "scrollTargets": 43,
+    "cdpAnimations": 119,
+    "canvases": 0
+  },
+  "namedAnimations": [
+    "rs-kb",
+    "rs-scroll"
+  ],
+  "scrollTriggeredElements": 43,
+  "representativeAnimations": [
+    {
+      "type": "CSSAnimation",
+      "playState": "running",
+      "animationName": "rs-kb",
+      "targetSelector": "img.rs-kenburns.rs-kb-active",
+      "targetRect": {
+        "x": 958.2350463867188,
+        "y": 187.19076538085938,
+        "width": 623.5298461914062,
+        "height": 516.024658203125,
+        "top": 187.19076538085938,
+        "right": 1581.764892578125,
+        "bottom": 703.2154235839844,
+        "left": 958.2350463867188
+      },
+      "keyframes": [
+        {
+          "offset": 0,
+          "easing": "ease-out",
+          "composite": "auto",
+          "transform": "scale(1.02)",
+          "computedOffset": 0
+        },
+        {
+          "offset": 1,
+          "easing": "ease-out",
+          "composite": "auto",
+          "transform": "scale(1.14)",
+          "computedOffset": 1
+        }
+      ],
+      "timing": {
+        "duration": 6500,
+        "delay": 0,
+        "iterations": 1,
+        "easing": "linear",
+        "direction": "normal"
+      }
+    },
+    {
+      "type": "CSSAnimation",
+      "playState": "running",
+      "animationName": "rs-scroll",
+      "targetSelector": "div.rs-marquee-track",
+      "targetRect": {
+        "x": -2787.1796875,
+        "y": 806.40625,
+        "width": 11337.75,
+        "height": 31.1875,
+        "top": 806.40625,
+        "right": 8550.5703125,
+        "bottom": 837.59375,
+        "left": -2787.1796875
+      },
+      "keyframes": [
+        {
+          "offset": 0,
+          "easing": "linear",
+          "composite": "auto",
+          "transform": "translate(0px)",
+          "computedOffset": 0
+        },
+        {
+          "offset": 1,
+          "easing": "linear",
+          "composite": "auto",
+          "transform": "translate(-50%)",
+          "computedOffset": 1
+        }
+      ],
+      "timing": {
+        "duration": 32000,
+        "delay": 0,
+        "iterations": null,
+        "easing": "linear",
+        "direction": "normal"
+      }
+    }
+  ]
+}

@@ -10,12 +10,12 @@ const ShellCtx = createContext(null);
 export const useShell = () => useContext(ShellCtx);
 
 const NAV = [
-  { label: "Story", href: "/brand-story" },
+  { label: "About Us", href: "/brand-story" },
   { label: "Products", href: "/products" },
+  { label: "Recipes", href: "/recipes" },
   { label: "HORECA", href: "/horeca" },
   { label: "Distributors", href: "/distributors" },
-  { label: "Export", href: "/export" },
-  { label: "Contact", href: "/contact" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 export function Eyebrow({ children, color = COLORS.red, center }) {
@@ -174,6 +174,7 @@ export function Footer() {
             <div className="flex gap-3 mt-2">
               <a href={LINKS.whatsapp} target="_blank" rel="noreferrer" className="rs-btn px-6 py-3 rounded-full" style={{ background: COLORS.mustard, color: COLORS.ink, fontSize: "0.78rem" }}>WhatsApp</a>
               <button onClick={openBulk} className="rs-btn px-6 py-3 rounded-full" style={{ border: "2px solid rgba(255,255,255,0.6)", color: "#fff", fontSize: "0.78rem" }}>Bulk Enquiry</button>
+              <a href="/catalogue.pdf" download className="rs-btn px-6 py-3 rounded-full" style={{ border: "2px solid rgba(255,255,255,0.6)", color: "#fff", fontSize: "0.78rem" }}>Download Catalogue</a>
             </div>
           </div>
         </div>
@@ -194,9 +195,13 @@ export function Footer() {
           </form>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-8 rs-body" style={{ color: "rgba(255,255,255,0.75)", fontSize: "0.82rem" }}>
+        <p className="rs-body pt-6" style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.72rem", lineHeight: 1.6 }}>
+          Disclaimer: Product images are illustrative; packaging may vary. Indicative yields depend on recipe and portioning. Rainbow® and the Rainbow Masala marks are the property of Darak Foods Pvt. Ltd. FSSAI licence details are printed on every pack.
+        </p>
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-6 rs-body" style={{ color: "rgba(255,255,255,0.75)", fontSize: "0.82rem" }}>
           <span>© 2026 Rainbow Masala · Darak Foods Pvt. Ltd. · FSSAI licensed · Since 1956</span>
           <div className="flex flex-wrap gap-5">
+            <Link href="/export" style={{ color: "rgba(255,255,255,0.75)" }}>Export</Link>
             <Link href="/blog" style={{ color: "rgba(255,255,255,0.75)" }}>Blog</Link>
             <Link href="/catalogue" style={{ color: "rgba(255,255,255,0.75)" }}>Catalogue</Link>
             {[["Facebook", "#"], ["LinkedIn", "https://in.linkedin.com/company/rainbow-masala"], ["Instagram", LINKS.instagram], ["YouTube", "#"]].map(([s, url]) => (

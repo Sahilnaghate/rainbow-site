@@ -1,0 +1,15 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/admin/page": "/admin",
+  "/page": "/",
+  "/blog/page": "/blog",
+  "/contact/page": "/contact",
+  "/horeca/page": "/horeca",
+  "/brand-story/page": "/brand-story",
+  "/blog/[slug]/page": "/blog/[slug]",
+  "/distributors/page": "/distributors",
+  "/catalogue/page": "/catalogue",
+  "/export/page": "/export",
+  "/recipes/page": "/recipes",
+  "/products/page": "/products"
+}

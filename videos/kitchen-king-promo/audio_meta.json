@@ -1,0 +1,50 @@
+{
+  "bgm": null,
+  "voices": [
+    {
+      "frame": 1,
+      "path": "audio/line-01.wav",
+      "duration_s": 1.378,
+      "words": []
+    },
+    {
+      "frame": 2,
+      "path": "audio/line-02.wav",
+      "duration_s": 2.872,
+      "words": []
+    },
+    {
+      "frame": 3,
+      "path": "audio/line-03.wav",
+      "duration_s": 4.901,
+      "words": []
+    },
+    {
+      "frame": 4,
+      "path": "audio/line-04.wav",
+      "duration_s": 4.358,
+      "words": []
+    },
+    {
+      "frame": 5,
+      "path": "audio/line-05.wav",
+      "duration_s": 2.954,
+      "words": []
+    },
+    {
+      "frame": 6,
+      "path": "audio/line-06.wav",
+      "duration_s": 2.471,
+      "words": []
+    }
+  ],
+  "sfx": [
+    {
+      "frame": 2,
+      "file": "assets/sfx/riser.mp3",
+      "offset_s": 0,
+      "duration_s": 10.03,
+      "volume": 0.35
+    }
+  ]
+}

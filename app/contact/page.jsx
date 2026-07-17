@@ -6,7 +6,7 @@ export const metadata = { title: "Contact — Rainbow Masala", description: "Cal
 export default function ContactPage() {
   return (
     <main>
-      <PageHero eyebrow="Contact & ecosystem" title="One call away from a consistent kitchen.">
+      <PageHero eyebrow="Contact us" title="One call away from a consistent kitchen.">
         Bulk supply, distributorships, exports or a plain question — pick whichever channel your day allows. WhatsApp is fastest.
       </PageHero>
       <ContactBlock />

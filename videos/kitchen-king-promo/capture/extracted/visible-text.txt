@@ -1,0 +1,236 @@
+[a] Products
+[a] Distributors
+[a] Partner Login
+[button] Bulk Enquiry
+[p] Professional kitchen masala partner · since 1956
+[h1] The same taste,
+[span] every batch.
+[h1] Every branch.
+[p] Batch-coded, farm-traceable masalas built for hotels, restaurants and caterers — where consistency, cost per plate and supply matter more than anything printed on the pack.
+[button] Bulk Enquiry
+[a] Download Catalogue
+[div] 1,200+
+[div] Kitchens served
+[div] 85+
+[div] Distributors
+[div] States
+[div] 100%
+[div] Farm-sourced
+[span] Cooked on Rainbow blends · batch-traceable
+[span] GARAM MASALA
+[span] KITCHEN KING MASALA
+[span] CHHOLE MASALA
+[span] PANEER MASALA
+[span] RAJMA MASALA
+[span] SAMBHAR MASALA
+[span] PAVBHAJI MASALA
+[span] CHAT MASALA
+[span] PANI PURI MASALA
+[span] SAFFRON
+[span] KESARI MILK MASALA
+[span] TURMERIC POWDER
+[span] RED CHILLI POWDER
+[span] CORIANDER POWDER
+[span] CUMIN POWDER
+[span] BLACK PEPPER (WHOLE)
+[span] CUMIN SEEDS (WHOLE)
+[span] CORIANDER SEEDS (WHOLE)
+[span] RED CHILLI (WHOLE)
+[span] GARAM MASALA
+[span] KITCHEN KING MASALA
+[span] CHHOLE MASALA
+[span] PANEER MASALA
+[span] RAJMA MASALA
+[span] SAMBHAR MASALA
+[span] PAVBHAJI MASALA
+[span] CHAT MASALA
+[span] PANI PURI MASALA
+[span] SAFFRON
+[span] KESARI MILK MASALA
+[span] TURMERIC POWDER
+[span] RED CHILLI POWDER
+[span] CORIANDER POWDER
+[span] CUMIN POWDER
+[span] BLACK PEPPER (WHOLE)
+[span] CUMIN SEEDS (WHOLE)
+[span] CORIANDER SEEDS (WHOLE)
+[span] RED CHILLI (WHOLE)
+[p] Product power
+[h2] Built for the pass, priced for the plate.
+[p] Cost-per-plate math
+[h3] What a plate really costs you.
+[span] Blend
+[option] Garam Masala
+[option] Kitchen King Masala
+[option] Chhole Masala
+[option] Paneer Masala
+[option] Rajma Masala
+[option] Sambhar Masala
+[option] Pavbhaji Masala
+[option] Chat Masala
+[option] Pani Puri Masala
+[option] Kesari Milk Masala
+[option] Turmeric Powder
+[option] Red Chilli Powder
+[option] Coriander Powder
+[option] Cumin Powder
+[span] Your price per kg (₹)
+[p] 1 kg ≈
+[p] 160
+[p] plates
+[p] ₹3.88
+[span] / plate
+[p] Indicative yields — validated per recipe with your chef.
+[span] Premium Blends
+[h3] Garam Masala
+[p] The house finishing blend
+[span] Packs:
+[b] 1kg · 5kg · 25kg
+[span] Shelf:
+[b] 12 mo
+[span] Yield:
+[b] 1kg ≈
+[b] 160
+[b] plates
+[span] Premium Blends
+[h3] Kitchen King Masala
+[p] All-purpose gravy depth
+[span] Packs:
+[b] 1kg · 5kg · 25kg
+[span] Shelf:
+[b] 12 mo
+[span] Yield:
+[b] 1kg ≈
+[b] 130
+[b] plates
+[span] Premium Blends
+[h3] Chhole Masala
+[p] North-Indian tang
+[span] Packs:
+[b] 1kg · 5kg
+[span] Shelf:
+[b] 12 mo
+[span] Yield:
+[b] 1kg ≈
+[b] 120
+[b] plates
+[span] Premium Blends
+[h3] Paneer Masala
+[p] Rich gravy base
+[span] Packs:
+[b] 1kg · 5kg
+[span] Shelf:
+[b] 12 mo
+[span] Yield:
+[b] 1kg ≈
+[b] 125
+[b] plates
+[span] Premium Blends
+[h3] Rajma Masala
+[p] Punjabi comfort
+[span] Packs:
+[b] 1kg · 5kg
+[span] Shelf:
+[b] 12 mo
+[span] Yield:
+[b] 1kg ≈
+[b] 120
+[b] plates
+[span] Premium Blends
+[h3] Sambhar Masala
+[p] South-Indian staple
+[span] Packs:
+[b] 1kg · 5kg · 25kg
+[span] Shelf:
+[b] 12 mo
+[span] Yield:
+[b] 1kg ≈
+[b] 140
+[b] plates
+[span] Premium Blends
+[h3] Pavbhaji Masala
+[p] Mumbai street classic
+[span] Packs:
+[b] 1kg · 5kg
+[span] Shelf:
+[b] 12 mo
+[span] Yield:
+[b] 1kg ≈
+[b] 135
+[b] plates
+[a] View the full range →
+[p] Chef-verified
+[h2] Kitchens that measured us, then stayed.
+[span] Video · 1:20
+[p] Same garam masala profile across all three kitchens for two years. That's the whole point.
+[p] Chef Prakash Rao
+[p] Executive Chef, 3-property hotel group
+[span] Video · 1:20
+[p] Costing a wedding menu is easier when a kilo behaves like the last kilo.
+[p] Imran Shaikh
+[p] Owner, 400-cover caterer
+[span] Video · 1:20
+[p] We switched for the batch codes. We stayed for the supply reliability.
+[p] Meera Kulkarni
+[p] F&B Manager, cloud-kitchen chain
+[p] Distributor & franchise
+[h2] Own a territory that
+[span] reorders itself.
+[div] ₹3–8 lakh
+[div] Investment
+[div] 14–18 months
+[div] ROI horizon
+[div] 12–18%
+[div] Trade margin
+[li] Territory exclusivity
+[li] First-stock buyback guarantee
+[li] Route-plan & beat support
+[li] HORECA lead hand-off from this website
+[p] Territories open now
+[span] Vidarbha
+[span] Marathwada
+[span] North Karnataka
+[span] Telangana
+[span] Madhya Pradesh (South)
+[p] Send your city and current distribution lines — we reply with the territory brief, price structure and first-stock plan.
+[a] Apply on WhatsApp
+[a] Email us
+[p] Founder film · 2:40 (placeholder)
+[p] The people behind the pack
+[h2] Three generations, one standard.
+[span] 1956
+[p] A single spice shop opens in Aurangpura.
+[span] 1988
+[p] First stone-ground blends sold under the Rainbow name.
+[span] 2005
+[p] Dedicated blending unit; hotels become regular buyers.
+[span] 2018
+[p] Batch coding and QC lab introduced.
+[span] 2026
+[p] Full traceability — every pack scans back to its farm lots.
+[p] Availability
+[h3] Where can you buy Rainbow?
+[button] Find your channel
+[h2] Talk to a
+[span] masala partner.
+[p] Darak Foods Pvt. Ltd. · 14, Pranav Plaza, Aurangpura, Chh. Sambhajinagar, 431001, Maharashtra, India
+[a] +91 84828 59999
+[a] sales@rainbowspices.com
+[a] WhatsApp
+[button] Bulk Enquiry
+[p] Questions professional kitchens ask
+[span] What is the minimum order for bulk supply?
+[p] 25kg per blend for direct HORECA supply. Below that, we route you to the nearest distributor so you get local delivery.
+[span] How do you keep taste consistent between batches?
+[span] Do you make custom blends for hotels?
+[span] What are your certifications?
+[span] Which cities do you currently deliver to?
+[p] Menu-costing ideas, monthly.
+[p] One email a month on standardisation, yields and food-cost control. No spam.
+[button] Subscribe
+[span] © 2026 Rainbow Masala · Darak Foods Pvt. Ltd. · FSSAI licensed · Since 1956
+[a] Catalogue
+[a] Facebook
+[a] LinkedIn
+[a] Instagram
+[a] Partner Login
