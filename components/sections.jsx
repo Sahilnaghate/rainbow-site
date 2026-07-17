@@ -4,7 +4,8 @@ import Link from "next/link";
 import { COLORS, tint, LINKS } from "../lib/theme.js";
 import { Reveal, TiltCard, SpiceMound, KenBurns } from "./ui.jsx";
 import { useShell, Eyebrow, H2, Field } from "./shell.jsx";
-import { TRUST_COUNTERS, CATEGORIES, CUISINES, PRODUCTS, RECIPES, TESTIMONIALS, TIMELINE, DISTRIBUTOR, HORECA_SOLUTIONS } from "../lib/data.js";
+import { CATEGORIES, CUISINES, PRODUCTS, RECIPES, TIMELINE, DISTRIBUTOR, HORECA_SOLUTIONS } from "../lib/data.js";
+import { useCounters, useTestimonials } from "../lib/cms.js";
 
 const inr = (n) => `₹${Number(n).toLocaleString("en-IN")}`;
 const HERO_SLIDES = ["/images/hero/garam-masal.jpg", "/images/hero/kitchenking-masala.jpg", "/images/hero/chat-masala.jpg"];
@@ -25,6 +26,7 @@ export function PageHero({ eyebrow, title, children }) {
 /* ---------- homepage hero ---------- */
 export function Hero() {
   const { openBulk } = useShell();
+  const counters = useCounters();
   return (
     <section className="relative pt-32 md:pt-40 pb-14 px-6 md:px-10 max-w-7xl mx-auto">
       <div className="grid md:grid-cols-2 gap-10 items-center">
@@ -49,7 +51,7 @@ export function Hero() {
           </Reveal>
           <Reveal delay={0.3}>
             <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-5">
-              {TRUST_COUNTERS.map((c) => (
+              {counters.map((c) => (
                 <div key={c.label} style={{ borderTop: `2px solid ${COLORS.mustard}`, paddingTop: "0.7rem" }}>
                   <div className="rs-display" style={{ fontSize: "1.45rem", color: COLORS.red, fontWeight: 600 }}>{c.value}</div>
                   <div className="rs-eyebrow" style={{ fontSize: "0.58rem", color: COLORS.inkDim, marginTop: "0.3rem" }}>{c.label}</div>
@@ -297,12 +299,13 @@ export function FounderSection() {
 
 /* ---------- testimonials ---------- */
 export function TestimonialsSection() {
+  const testimonials = useTestimonials();
   return (
     <section className="px-6 md:px-10 py-24 md:py-28 max-w-7xl mx-auto">
       <Reveal><Eyebrow center>Chef-verified</Eyebrow></Reveal>
       <Reveal delay={0.06}><H2 center>Kitchens that measured us, then stayed.</H2></Reveal>
       <div className="grid md:grid-cols-3 gap-7 mt-14">
-        {TESTIMONIALS.map((t, i) => (
+        {testimonials.map((t, i) => (
           <Reveal key={t.name} delay={i * 0.08}>
             <TiltCard className="rounded-2xl overflow-hidden h-full">
               <div className="rounded-2xl h-full flex flex-col" style={{ background: COLORS.paper, border: `1px solid ${tint(COLORS.ink, 0.1)}` }}>

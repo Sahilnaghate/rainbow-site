@@ -1,12 +1,4 @@
 {
-  "/page": "app/page.js",
-  "/products/page": "app/products/page.js",
-  "/horeca/page": "app/horeca/page.js",
-  "/distributors/page": "app/distributors/page.js",
-  "/export/page": "app/export/page.js",
-  "/brand-story/page": "app/brand-story/page.js",
-  "/catalogue/page": "app/catalogue/page.js",
-  "/contact/page": "app/contact/page.js",
-  "/blog/page": "app/blog/page.js",
-  "/blog/[slug]/page": "app/blog/[slug]/page.js"
+  "/admin/page": "app/admin/page.js",
+  "/page": "app/page.js"
 }

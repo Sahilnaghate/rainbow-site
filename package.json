@@ -9,6 +9,7 @@
     "start": "next start -p 3003"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.110.7",
     "@tailwindcss/postcss": "^4.3.3",
     "next": "^15.5.20",
     "react": "^18.2.0",

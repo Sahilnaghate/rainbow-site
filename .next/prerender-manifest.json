@@ -1,1 +1,11 @@
-{"version":4,"routes":{"/blog/reduce-food-cost-standardized-masalas":{},"/blog/cost-per-plate-masala-math":{},"/blog/batch-codes-and-kitchen-audits":{}},"dynamicRoutes":{"/blog/[slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/blog/[slug]","routeRegex":"^\\/blog\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"860bde53617906e5a2075252468faa87","previewModeSigningKey":"a5a2af2eab557b49f19449595ed5300bfe479ed8aec7b7e087b230d6ab30f4ee","previewModeEncryptionKey":"85741a0edc7d4cf8cd7c6dee0288a97e16f0d2c4842c9cf04f0e7022754c8273"}}
+{
+  "version": 4,
+  "routes": {},
+  "dynamicRoutes": {},
+  "notFoundRoutes": [],
+  "preview": {
+    "previewModeId": "39d13b840f747775f8d74473fe7cb841",
+    "previewModeSigningKey": "1ff445896b9514985818139d3397252f6156abb89643705d4d043e218bd9666a",
+    "previewModeEncryptionKey": "d5a79db84c9c60af88c8e570075f535cc50f4aea453f39c9e5c25ea584711207"
+  }
+}
