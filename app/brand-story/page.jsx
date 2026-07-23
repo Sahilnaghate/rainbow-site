@@ -1,5 +1,6 @@
 import { PageHero, FounderSection, Marquee } from "../../components/sections.jsx";
 import { StoryManufacturing } from "../../components/story.jsx";
+import { VideoBand } from "../../components/ui.jsx";
 
 export const metadata = { title: "Brand Story — Rainbow Masala since 1956", description: "From a single Aurangpura spice shop in 1956 to a batch-coded blending house. The Rainbow Masala story and how we manufacture." };
 
@@ -18,6 +19,14 @@ export default function BrandStoryPage() {
             </div>
           ))}
         </div>
+      </section>
+      <section className="px-6 md:px-10 py-10 max-w-7xl mx-auto">
+        <VideoBand
+          src="/videos/heritage-stone-grinding.mp4"
+          eyebrow="The original process"
+          title="It started on a grinding stone."
+          sub="Before machines, every Rainbow blend was worked by hand on stone — the profiles we batch-code today were perfected there."
+        />
       </section>
       <FounderSection />
       <StoryManufacturing />

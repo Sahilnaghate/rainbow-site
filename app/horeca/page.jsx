@@ -1,6 +1,6 @@
 "use client";
 import { PageHero, TestimonialsSection, CostPerPlate } from "../../components/sections.jsx";
-import { Reveal, TiltCard } from "../../components/ui.jsx";
+import { Reveal, TiltCard, VideoBand } from "../../components/ui.jsx";
 import { useShell, Eyebrow, H2 } from "../../components/shell.jsx";
 import { COLORS, tint } from "../../lib/theme.js";
 import { HORECA_SOLUTIONS } from "../../lib/data.js";
@@ -13,6 +13,14 @@ export default function HorecaPage() {
         Three supply formats, one standard: the same batch-coded taste whether you run a 40-cover restaurant or a 4,000-plate banquet calendar.
       </PageHero>
       <section className="px-6 md:px-10 pb-24 max-w-7xl mx-auto">
+        <div className="pb-12">
+          <VideoBand
+            src="/videos/kadhai-sprinkle.mp4"
+            eyebrow="On the line"
+            title="Blends made for the kadhai, not the shelf."
+            sub="Profiles built for high heat, big batches and fast service — the same hit of flavour on plate one and plate one thousand."
+          />
+        </div>
         <div className="grid md:grid-cols-3 gap-7">
           {HORECA_SOLUTIONS.map((s, i) => (
             <Reveal key={s.title} delay={i * 0.08}>

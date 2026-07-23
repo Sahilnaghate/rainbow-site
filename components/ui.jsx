@@ -186,13 +186,35 @@ export function SteamLayer({ count = 5, opacity = 1 }) {
 
 /* ── premium signature-dish showcase: framed real food photo with aroma steam
    + a 3D floating pack (v3 item 2) ── */
-export function SignatureDish({ dish, pack, badge, title, sub, deep = "#5C2210" }) {
+/* ── full-width cinematic video band with caption (AI footage placements) ── */
+export function VideoBand({ src, poster, eyebrow, title, sub, ratio = "21 / 9" }) {
+  return (
+    <div className="relative rounded-3xl overflow-hidden" style={{ aspectRatio: ratio, boxShadow: "0 34px 80px rgba(42,22,12,0.3)" }}>
+      <video src={src} poster={poster} autoPlay muted loop playsInline
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,8,4,0.05) 40%, rgba(20,8,4,0.72) 100%)" }} />
+      <div className="absolute left-0 right-0 bottom-0 p-6 md:p-8">
+        {eyebrow && <p className="rs-eyebrow" style={{ fontSize: "0.62rem", color: "#FAA219" }}>{eyebrow}</p>}
+        {title && <p className="rs-display mt-1" style={{ fontSize: "clamp(1.3rem, 2.6vw, 1.9rem)", color: "#fff", fontWeight: 600, fontStyle: "italic" }}>{title}</p>}
+        {sub && <p className="rs-body mt-1 max-w-lg" style={{ fontSize: "0.85rem", color: "rgba(255,246,231,0.9)" }}>{sub}</p>}
+      </div>
+    </div>
+  );
+}
+
+export function SignatureDish({ dish, video, pack, badge, title, sub, deep = "#5C2210" }) {
   return (
     <div className="relative rounded-3xl overflow-hidden" style={{ aspectRatio: "1 / 1", boxShadow: "0 40px 90px rgba(42,22,12,0.35)" }}>
-      <img src={dish} alt={title} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+      {video ? (
+        <video src={video} poster={dish} autoPlay muted loop playsInline
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+      ) : (
+        <img src={dish} alt={title} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+      )}
       {/* warm grade + bottom vignette */}
       <div className="absolute inset-0" style={{ background: `radial-gradient(120% 90% at 50% 20%, rgba(0,0,0,0) 45%, rgba(20,8,4,0.5) 100%), linear-gradient(180deg, transparent 40%, ${deep}f2 96%)` }} />
-      <SteamLayer count={6} />
+      {/* CSS aroma only when there's no real footage (the clips carry real steam) */}
+      {!video && <SteamLayer count={6} />}
       {/* floating pack */}
       {pack && (
         <div className="absolute rs-float3d" style={{ right: "7%", bottom: "9%", width: "34%", zIndex: 3, filter: "drop-shadow(0 26px 34px rgba(0,0,0,0.55))" }}>

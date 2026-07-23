@@ -125,6 +125,7 @@ export function SignatureShowcase() {
         <Reveal>
           <SignatureDish
             dish="/images/recipes/kitchen-king.jpg"
+            video="/videos/chef-sprinkle-steam.mp4"
             pack="/images/products/kitchen-king.png"
             badge="★ Signature blend"
             title="Kitchen King, plated."
