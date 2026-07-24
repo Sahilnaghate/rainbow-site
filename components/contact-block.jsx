@@ -1,9 +1,8 @@
 "use client";
+import Link from "next/link";
 import { Reveal } from "./ui.jsx";
 import { useShell } from "./shell.jsx";
 import { COLORS, tint, LINKS } from "../lib/theme.js";
-import { PRODUCTS } from "../lib/data.js";
-import { useGallery } from "../lib/cms.js";
 
 const SOCIALS = [
   { label: "Meta (Facebook)", href: "https://www.facebook.com/rainbowmasala", accent: "#1877F2" },
@@ -18,9 +17,6 @@ const CHANNELS = [
 
 export function ContactBlock() {
   const { openBulk, openAvail } = useShell();
-  const cms = useGallery();
-  const fallback = PRODUCTS.filter((p) => p.img).slice(0, 8).map((p) => ({ id: p.name, title: p.name, media_type: "image", media_url: p.img, _tint: p.base }));
-  const gallery = cms && cms.length ? cms : fallback;
   return (
     <section className="px-6 md:px-10 pb-24 max-w-7xl mx-auto">
       <div className="grid md:grid-cols-3 gap-6">
@@ -58,35 +54,16 @@ export function ContactBlock() {
         </div>
       </Reveal>
 
-      {/* media gallery (v2) */}
+      {/* media moved to its own page — link out */}
       <Reveal delay={0.2}>
-        <div className="mt-14">
-          <p className="rs-eyebrow" style={{ fontSize: "0.7rem", color: COLORS.red }}>Media gallery</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-5">
-            {gallery.map((g) => (
-              <div key={g.id} className="rounded-xl overflow-hidden relative flex items-center justify-center" style={{ background: tint(g._tint || COLORS.mustard, 0.12), border: `1px solid ${tint(g._tint || COLORS.mustard, 0.35)}`, aspectRatio: "1/1" }}>
-                {g.media_type === "video" ? (
-                  <a href={g.media_url} target="_blank" rel="noreferrer" className="flex flex-col items-center justify-center w-full h-full" style={{ background: COLORS.ink }}>
-                    <span className="flex items-center justify-center rounded-full" style={{ width: "48px", height: "48px", background: "rgba(255,246,231,0.92)" }}>
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill={COLORS.red}><path d="M8 5v14l11-7z"/></svg>
-                    </span>
-                    <span className="rs-body mt-2 px-3 text-center" style={{ fontSize: "0.72rem", color: "rgba(255,246,231,0.85)" }}>{g.title}</span>
-                  </a>
-                ) : g._tint ? (
-                  <img src={g.media_url} alt={g.title} style={{ maxWidth: "85%", maxHeight: "85%", objectFit: "contain" }} />
-                ) : (
-                  <img src={g.media_url} alt={g.title} className="w-full h-full" style={{ objectFit: "cover" }} />
-                )}
-              </div>
-            ))}
+        <Link href="/media" className="mt-8 rounded-2xl p-7 flex flex-wrap items-center justify-between gap-4" style={{ background: COLORS.ink, display: "flex" }}>
+          <div>
+            <p className="rs-eyebrow" style={{ fontSize: "0.62rem", color: COLORS.mustard }}>Media & films</p>
+            <p className="rs-display mt-1" style={{ fontSize: "1.25rem", color: "#fff", fontWeight: 600 }}>See the range in motion.</p>
+            <p className="rs-body mt-1" style={{ fontSize: "0.85rem", color: "rgba(255,246,231,0.85)" }}>Brand films, product close-ups and the photo gallery.</p>
           </div>
-          <p className="rs-body mt-4" style={{ fontSize: "0.8rem", color: COLORS.inkDim }}>
-            Buy retail packs online:{" "}
-            <a className="underline" style={{ color: COLORS.red }} href={LINKS.amazon} target="_blank" rel="noreferrer">Amazon</a> ·{" "}
-            <a className="underline" style={{ color: COLORS.red }} href={LINKS.flipkart} target="_blank" rel="noreferrer">Flipkart</a> ·{" "}
-            <a className="underline" style={{ color: COLORS.red }} href={LINKS.indiamart} target="_blank" rel="noreferrer">IndiaMART</a>
-          </p>
-        </div>
+          <span className="rs-btn px-6 py-3 rounded-full shrink-0" style={{ background: COLORS.red, color: "#fff", fontSize: "0.75rem" }}>Open Media →</span>
+        </Link>
       </Reveal>
     </section>
   );

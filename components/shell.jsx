@@ -15,6 +15,7 @@ const NAV = [
   { label: "Products", href: "/products" },
   { label: "Recipes", href: "/recipes" },
   { label: "HORECA", href: "/horeca" },
+  { label: "Media", href: "/media" },
   { label: "Distributors", href: "/distributors" },
   { label: "Contact Us", href: "/contact" },
 ];

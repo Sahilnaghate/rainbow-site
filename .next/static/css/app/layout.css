@@ -184,6 +184,9 @@
   }
 }
 @layer utilities {
+  .pointer-events-none {
+    pointer-events: none;
+  }
   .visible {
     visibility: visible;
   }
@@ -219,6 +222,9 @@
   }
   .right-0 {
     right: 0px;
+  }
+  .right-3 {
+    right: calc(var(--spacing) * 3);
   }
   .right-4 {
     right: calc(var(--spacing) * 4);
@@ -348,6 +354,9 @@
   }
   .mt-14 {
     margin-top: calc(var(--spacing) * 14);
+  }
+  .mt-16 {
+    margin-top: calc(var(--spacing) * 16);
   }
   .mt-auto {
     margin-top: auto;
@@ -783,6 +792,9 @@
     }
     .md\:items-end {
       align-items: flex-end;
+    }
+    .md\:p-6 {
+      padding: calc(var(--spacing) * 6);
     }
     .md\:p-7 {
       padding: calc(var(--spacing) * 7);

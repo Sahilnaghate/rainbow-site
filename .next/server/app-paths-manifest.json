@@ -1,6 +1,4 @@
 {
-  "/brand-story/page": "app/brand-story/page.js",
-  "/recipes/page": "app/recipes/page.js",
-  "/horeca/page": "app/horeca/page.js",
-  "/page": "app/page.js"
+  "/media/page": "app/media/page.js",
+  "/contact/page": "app/contact/page.js"
 }
